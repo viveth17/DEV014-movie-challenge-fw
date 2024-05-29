@@ -1,10 +1,8 @@
 export interface apiMovieData {
     title: string;
-    poster: string;
-    releaseYear: number;
-    director: string;
-    genre: string;
-    duration: number;
-    rating: number;
+    poster_path: string;
+    release_date: string;
+    genre_ids: Array<number>;
+    vote_average: number;
   }
   

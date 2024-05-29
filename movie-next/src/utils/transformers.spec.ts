@@ -6,22 +6,27 @@ describe ('formatMovie', () =>{  //Descripcion de las pruebas para formatMovie
     it('Debería transformar los datos de la API al modelo Movie', () => { // Primer caso de prueba
 
     const apiData: apiMovieData = { //Definir datos de ejemplo de la API
-      title: 'Pelicula de ejemplo',
-      poster: 'https://ejemplo.com/poster.jpg',
-      releaseYear: 2023,
-      director: 'Director Ejemplo',
-      genre: 'Drama',
-      duration: 120,
-      rating: 4.5,
+     
+        "genre_ids": [
+            878,
+            28,
+            12
+        ],
+        "poster_path": "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
+        "release_date": "2024-03-27",
+        "title": "Godzilla x Kong: The New Empire",
+        "vote_average": 7.261
     };
     const expectedMovie: Movie = { //Definir el resultado esperado despues de la transformacion 
-        title: 'Pelicula de ejemplo',
-        poster: 'https://ejemplo.com/poster.jpg',
-        releaseYear: 2023,
-        director: 'Director Ejemplo',
-        genre: 'Drama',
-        duration: 120,
-        rating: 4.5,
+        title:  "Godzilla x Kong: The New Empire",
+        poster: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
+        releaseYear: "2024-03-27",
+        genre: [
+            878,
+            28,
+            12
+        ],
+        rating:  7.261
       };
   
       const formattedMovie = formatMovie(apiData); //Llamado de la funcion formatMovie con los datos de la API
@@ -39,10 +44,8 @@ describe ('formatMovie', () =>{  //Descripcion de las pruebas para formatMovie
         title: 'Pelicula de ejemplo incompleta',
         poster: undefined,
         releaseYear: undefined,
-        director: undefined,
         genre: undefined,
-        duration: undefined,
-        rating: undefined,
+        rating: undefined
       };
     // Llamado de la funcion formatMovie con los datos parciales de la API
       const formattedMovie = formatMovie(apiData as apiMovieData);

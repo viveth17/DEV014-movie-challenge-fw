@@ -2,10 +2,8 @@
 type Movie = {
     title: string;          // Título de la película
     poster: string;         // URL del póster de la película
-    releaseYear: number;    // Año de lanzamiento de la película
-    director: string;      // Director de la película
-    genre: string;        // Géneros de la película 
-    duration: number;       // Duración de la película en minutos
+    releaseYear: string;    // Año de lanzamiento de la película
+    genre: Array<number>;        // Géneros de la película 
     rating: number;         // Calificación de la película 
 
   };
