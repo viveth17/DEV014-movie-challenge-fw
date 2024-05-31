@@ -1,4 +1,7 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
+// eslint-disable-next-line no-undef
+process.env.API_KEY = 'mock_api_key';
+
 export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',

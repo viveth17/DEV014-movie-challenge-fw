@@ -28,9 +28,12 @@ export function getMovies(): Promise<Movie[]> { //funcion para obtener datos de 
       })
       .then(data => { 
         //Mapea los datos de las peliculas de la API al modelo de negocio Movie utilizando formatMovie
-        const movies: Movie[] = data.results.map((apiMovie: apiMovieData) => formatMovie(apiMovie));
+        const movies: Movie[] = data.map( (apiMovie: apiMovieData) => formatMovie(apiMovie) );
         return movies; //Retorna el array de peliculas trasnformadas
-      });
+      })
+      .catch(error => {
+      throw error; 
+    });
   }
   
 
