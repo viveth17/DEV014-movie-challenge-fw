@@ -7,7 +7,7 @@ export function formatMovie(apiMovieData: apiMovieData): Movie {
     poster: apiMovieData.poster_path,
     releaseYear: apiMovieData.release_date,
     genre: apiMovieData.genre_ids,
-    rating: apiMovieData.vote_average,
+    rating: apiMovieData.vote_average
   };
 
   return formattedMovie;

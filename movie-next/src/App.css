@@ -1,22 +1,66 @@
+
+  .movie-card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 10px;
+    position: relative;
+}
+.image-container {
+  position: relative; /* Contenedor relativo para el texto y la imagen */
+  display: inline-block;
+}
+
+  .movie-title {
+    font-size: 23px;
+    color: #FFFFFF;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: absolute;
+    top: 10px; /* Ajusta esta propiedad para posicionar el texto donde lo desees */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el texto horizontalmente */
+   
+}
+.image-card {
+  width: 368px;
+  height: 207px;
+  margin: 6px;
+  border-radius: 10px;
+}
+.movie-release-year {
+  color: #666;
+}
+body {
+  background-color: #0E1239; /* Cambia este color según tus preferencias */
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+  background-color: 0E1239;
+} 
 
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
-}
+} */
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
-}
+} */
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
+} */
 
 @keyframes logo-spin {
   from {
@@ -25,7 +69,7 @@
   to {
     transform: rotate(360deg);
   }
-}
+} 
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
@@ -39,4 +83,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} 
