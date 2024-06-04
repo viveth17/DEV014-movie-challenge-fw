@@ -1,81 +1,114 @@
-
-  .movie-card {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 10px;
-    position: relative;
-}
-.image-container {
-  position: relative; /* Contenedor relativo para el texto y la imagen */
+.movie-card {
+  position: relative;
   display: inline-block;
+  height: 300px;
 }
 
-  .movie-title {
-    font-size: 23px;
-    color: #FFFFFF;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    position: absolute;
-    top: 10px; /* Ajusta esta propiedad para posicionar el texto donde lo desees */
-    left: 50%;
-    transform: translateX(-50%); /* Centra el texto horizontalmente */
-   
+.image-container {
+  margin-left: 30px;
+  height: 650px;
 }
+
+.movie-title {
+  font-size: 23px;
+  color: #FFFFFF;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: absolute;
+  top: 124px;
+  left: 42px;
+  z-index: 1;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
+}
+
 .image-card {
   width: 368px;
   height: 207px;
   margin: 6px;
   border-radius: 10px;
+  z-index: 0;
 }
+
 .movie-release-year {
-  color: #666;
+  font-size: 23px;
+  color: #FFFFFF;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: absolute;
+  bottom: 72px;
+  left: 44px;
+  z-index: 1;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
+
 }
+
 body {
-  background-color: #0E1239; /* Cambia este color según tus preferencias */
+  background-color: #0E1239;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* estilos titulo principal */
+.main-title {
+  font-weight: 800;
+  font-size: 45px;
+  margin-top: 50px;
+  margin-left: 40px;
+}
 
+.main-title::after {
+  content: "NEXT";
+  color: #FFD600;
+  /* Color amarillo #FFD600 para 'Next' */
+}
 
+.app-container {
+  color: white;
+}
+.app-filters{
+  height: 100.0px;
+}
+.app-pagination{
+  height: 100.0px;
+}
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
   background-color: 0E1239;
-} 
+}
 
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
-} */
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-} */
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-} */
+}
 
-@keyframes logo-spin {
+*/ .logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+*/ .logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+*/
+/* @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-} 
+}  */
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
+} */
 
 .card {
   padding: 2em;
@@ -83,4 +116,4 @@ body {
 
 .read-the-docs {
   color: #888;
-} 
+}

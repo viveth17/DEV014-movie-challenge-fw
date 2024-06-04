@@ -6,6 +6,7 @@ function App() {
  
 
   const exampleMovie: Movie = {
+    id: 653346,
     title: "Godzilla x Kong: The New Empire",
     poster: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
     releaseYear: "2024-03-27",
@@ -19,13 +20,21 @@ function App() {
 
   return (
     <>
-      <h1>MovieNext</h1>
+      <div className="app-container">
+      <h1 className="main-title">MOVIE</h1>
+      </div>
+      <div className='app-filters'>
+     Aqui van los filtros
+      </div>
       <MovieCard movie = {exampleMovie} />
+ 
 
       <p  role="paragraph" title="read-the-docs" className="read-the-docs">
      
       </p>
-   
+     <footer>
+      <div className='app-pagination'>Aqui va la paginacion</div>
+     </footer>
     </>
   )
 }

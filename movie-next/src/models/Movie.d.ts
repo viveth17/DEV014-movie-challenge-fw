@@ -5,6 +5,7 @@ type Movie = {
     releaseYear: string;    // Año de lanzamiento de la película
     genre: Array<number>;        // Géneros de la película 
     rating: number;         // Calificación de la película 
+    id: numbeer;
 
   };
   

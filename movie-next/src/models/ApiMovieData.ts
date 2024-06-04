@@ -4,5 +4,6 @@ export interface apiMovieData {
     release_date: string;
     genre_ids: Array<number>;
     vote_average: number;
+    id : number;
   }
   
