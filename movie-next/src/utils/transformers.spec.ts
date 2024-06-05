@@ -16,7 +16,8 @@ describe ('formatMovie', () =>{  //Descripcion de las pruebas para formatMovie
         "release_date": "2024-03-27",
         "title": "Godzilla x Kong: The New Empire",
         "vote_average": 7.261,
-        "id" :  823464
+        "id" :  823464,
+        "backdrop_path" : "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg"
     };
     const expectedMovie: Movie = { //Definir el resultado esperado despues de la transformacion 
         title:  "Godzilla x Kong: The New Empire",
@@ -28,7 +29,8 @@ describe ('formatMovie', () =>{  //Descripcion de las pruebas para formatMovie
             12
         ],
         rating:  7.261,
-        id :  823464
+        id :  823464,
+        backdrop_path : "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg"
       };
   
       const formattedMovie = formatMovie(apiData); //Llamado de la funcion formatMovie con los datos de la API

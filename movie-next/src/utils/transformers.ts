@@ -8,7 +8,8 @@ export function formatMovie(apiMovieData: apiMovieData): Movie {
     releaseYear: apiMovieData.release_date,
     genre: apiMovieData.genre_ids,
     rating: apiMovieData.vote_average,
-    id: apiMovieData.id
+    id: apiMovieData.id,
+    backdrop_path : apiMovieData.backdrop_path
   };
 
   return formattedMovie;

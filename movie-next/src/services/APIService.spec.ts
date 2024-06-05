@@ -23,7 +23,9 @@ describe('getMovies', () => {
         poster_path: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
         release_date: "2024-03-27",
         title: "Godzilla x Kong: The New Empire",
-        vote_average: 7.261
+        vote_average: 7.261,
+        backdrop_path : "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg"
+        
       }
     ];
     const responseMovies = [
@@ -32,7 +34,8 @@ describe('getMovies', () => {
         poster: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
         releaseYear: "2024-03-27",
         title: "Godzilla x Kong: The New Empire",
-        rating: 7.261
+        rating: 7.261,
+        backdrop_path : "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg"
       }
     ];
     fetchMock.mockResponseOnce(JSON.stringify(mockMovies));

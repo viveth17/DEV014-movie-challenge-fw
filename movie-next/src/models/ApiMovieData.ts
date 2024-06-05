@@ -5,5 +5,6 @@ export interface apiMovieData {
     genre_ids: Array<number>;
     vote_average: number;
     id : number;
+    backdrop_path : string;
   }
   

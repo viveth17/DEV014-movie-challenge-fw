@@ -6,6 +6,7 @@ type Movie = {
     genre: Array<number>;        // Géneros de la película 
     rating: number;         // Calificación de la película 
     id: numbeer;
+    backdrop_path : string;
 
   };
   
