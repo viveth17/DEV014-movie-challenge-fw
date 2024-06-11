@@ -4,19 +4,22 @@ import React from "react";
 
 //Definir una prop llamada movies de tipo Movie [] que represente un array de modelos de negocios de películas
 interface MovieListProps {
-    movies: Movie[];
+  movies: Movie[];
 }
 const MovieList: React.FC<MovieListProps> = ({ movies }) => {
+  if (movies.length === 0) {
     return (
-        <div>
-        <h2></h2>
-        <div className="movie-list">
-            {movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-            ))}
-        </div>
-    </div>
-);
+      <span>"No movies available"</span>
+    )
+  } else {
+    return (
+      <div className="movie-list">
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    );
+  }
 };
 
 export default MovieList;
