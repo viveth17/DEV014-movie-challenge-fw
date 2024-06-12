@@ -1,11 +1,13 @@
 import '@testing-library/jest-dom'
 import { render, screen } from "@testing-library/react"
 import App from "../App.tsx"
+import fetchMock from 'jest-fetch-mock';
+fetchMock.enableMocks();
 
 
-test('demo', () => {
-    expect(true).toBe(true);
-  })
+beforeEach(() => {
+  fetchMock.resetMocks();
+});
   
   test("Renders the main page", () => {
     render(<App />);

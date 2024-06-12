@@ -2,14 +2,16 @@
 //importar funcion "formatMovie" (Para transformar esos datos)
 import { formatMovie } from "../utils/transformers";
 import Movie from "../models/Movie";
-import dotenv from 'dotenv'; //para acceder a la variable de entorno (importar 'dotenv')
+// import dotenv from 'dotenv'; //para acceder a la variable de entorno (importar 'dotenv')
 import { apiMovieData } from "../models/ApiMovieData";
 
-dotenv.config(); //configuracion 
+// dotenv.config(); //configuracion 
+// console.log('API Key:', process.env.REACT_APP_API_KEY);
 
 
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = process.env.API_KEY;  // para acceder a la variable de entorno definida en .env
+const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = '507d215bc9cdb8bdfd69fe3f82871b8b';/*process.env.API_KEY;*/  // para acceder a la variable de entorno definida en .env
 
 export function getMovies(): Promise<Movie[]> { //funcion para obtener datos de peliculas desde el endpoint (Devuelve una Promise que resuelve un array de objetos de tipo Movie)
     if (!API_KEY) { //verifica API_KEY esté definida en las variables de entorno
@@ -28,7 +30,7 @@ export function getMovies(): Promise<Movie[]> { //funcion para obtener datos de 
       })
       .then(data => { 
         //Mapea los datos de las peliculas de la API al modelo de negocio Movie utilizando formatMovie
-        const movies: Movie[] = data.map( (apiMovie: apiMovieData) => formatMovie(apiMovie) );
+        const movies: Movie[] = data.results.map( (apiMovie: apiMovieData) => formatMovie(apiMovie) );
         return movies; //Retorna el array de peliculas trasnformadas
       })
       .catch(error => {
