@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import MovieList from './MovieList';
 import Movie from '../models/Movie';
 import { getMovies } from '../services/APIService';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Loading } from '../components/Loading';
+import { Spinner } from "reactstrap"
+
 
 
 const Home: React.FC = () => {
@@ -13,25 +17,31 @@ const Home: React.FC = () => {
 
   // useEffect para simular la carga de datos
   useEffect(() => {
-    // Aquí se puede hacer una llamada a una API para obtener los datos de las películas
+    // Simular un tiempo de respuesta de la API con un retraso de 5 segundos
+    const delay = 3000;
+    // Aquí se hace una llamada a la API para obtener los datos de las películas
+    setTimeout(() => {
     getMovies()
       .then(response => {
         setMovies(response); //Setea los datos 
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error fetching movies:', error);
+        setIsLoading(false);
       });
-      setIsLoading(false); // Desactiva modo "cargando"
+    }, delay);
+    // setIsLoading(false); // Desactiva modo "cargando"
   }, []);
 
   if (isLoading) { // si esta cargando, mostramos un texto que lo indique 
-    console.log("is loading...");
     return (
       <div className='App'>
-        <h1>Loading...</h1>
+        <Spinner />  
+         <p className='loagin-text'>Loading...</p> 
       </div>
     );
-  } 
+  }
   else {
     return (
       <div>
@@ -39,8 +49,8 @@ const Home: React.FC = () => {
       </div>
     );
   }
- 
 };
+
 
 export default Home;
 
