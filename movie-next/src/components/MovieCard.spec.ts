@@ -66,7 +66,7 @@ describe('MovieCard', () => {
         
         // Verificamos que el título y el año de estreno estén presentes
         expect(screen.getByAltText(/Godzilla x Kong: The New Empire/i)).toBeTruthy();
-        expect(screen.getByText('2024-03-27')).toBeTruthy();
+        expect(screen.getByText('2024')).toBeTruthy();
         
         // Verificamos que la imagen de fondo esté presente y tenga la ruta correcta
         const imageElement = screen.getByAltText(/Godzilla x Kong: The New Empire/i);

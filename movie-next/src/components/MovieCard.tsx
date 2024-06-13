@@ -6,6 +6,8 @@ interface MovieCardProps {
     movie: Movie;
 }
 export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+//Extraer el año de la fecha de estreno
+const releaseYear = movie.releaseYear ? new Date(movie.releaseYear).getFullYear() : "Release year not available";
 
     return (
         <div className="movie-card">
@@ -26,7 +28,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             </div>
             <div className="container-infoMovie">
                 <h2 className="movie-title">{movie.title || "No title available"}</h2>
-                <p className="movie-release-year">{movie.releaseYear || "Release year not available"}</p>
+                <p className="movie-release-year">{releaseYear}</p>
             </div>
         </div>
     );
