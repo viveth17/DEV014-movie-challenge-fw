@@ -43,7 +43,7 @@ describe('getMovies', () => {
       ];
     fetchMock.mockResponseOnce(JSON.stringify(mockMovies));
 
-    return getMovies()
+    return getMovies(({ filters: { page: 1 } }))
     .then( response =>{
       expect(fetchMock).toHaveBeenCalledWith(
         'https://api.themoviedb.org/3/discover/movie?api_key=mock_api_key'
@@ -56,7 +56,7 @@ describe('getMovies', () => {
     fetchMock.mockRejectOnce(new Error('Failed to fetch'));
 
 
-    return expect(getMovies()).rejects.toThrow('Failed to fetch');
+    return expect(getMovies({ filters: { page: 1 } })).rejects.toThrow('Failed to fetch');
   });
 
   it('debería lanzar un error si la solicitud no es exitosa', () => {
@@ -64,7 +64,7 @@ describe('getMovies', () => {
     fetchMock.mockResponseOnce(JSON.stringify({}), { status: 404, statusText: 'Not Found' });
 
 
-    return expect(getMovies()).rejects.toThrow('Network response was not ok');
+    return expect(getMovies({ filters: { page: 1 } })).rejects.toThrow('Network response was not ok');
   });
 
 
