@@ -24,13 +24,13 @@ const Home: React.FC = () => {
 
   // useEffect para simular la carga de datos
   useEffect(() => {
-    // Simular un tiempo de respuesta de la API con un retraso de 5 segundos
-    const delay = 3000;
+    // Simular un tiempo de respuesta de la API con un retraso de 1 segundos
+    const delay = 1000;
     // Aquí se hace una llamada a la API para obtener los datos de las películas
     setTimeout(() => {
-      getMovies()
-        .then(response => {
-          setMovies(response); //Setea los datos 
+      getMovies({ filters: { page: 1 } })
+        .then(({ movies })=> {
+          setMovies(movies); //Setea los datos 
           setIsLoading(false);
         })
         .catch(() => {

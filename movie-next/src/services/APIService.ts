@@ -13,12 +13,33 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = process.env.REACT_APP_API_KEY;
 // const API_KEY = '507d215bc9cdb8bdfd69fe3f82871b8b';/*process.env.API_KEY;*/  // para acceder a la variable de entorno definida en .env
 
-export function getMovies(): Promise<Movie[]> { //funcion para obtener datos de peliculas desde el endpoint (Devuelve una Promise que resuelve un array de objetos de tipo Movie)
+interface GetMoviesParams {
+  filters: {
+    page: number;
+  }
+}
+
+interface MoviesResponse {
+  metaData: {
+    pagination: {
+      currenPage: number;
+      totalPages: number;
+    }
+  }
+  movies: Movie[];
+}
+
+export function getMovies(params : GetMoviesParams): Promise<MoviesResponse> { //funcion para obtener datos de peliculas desde el endpoint (Devuelve una Promise que resuelve un array de objetos de tipo Movie)
+
+  const { filters } = params; //Desestructuracion para obtner el objeto filters
+  const page = filters?.page || 1; // Valor por defecto de 1 si filters.page no está definido o es null/undefined
+
     if (!API_KEY) { //verifica API_KEY esté definida en las variables de entorno
       throw new Error('API_KEY not found in environment variables');
     }
+
   //construye la URL de la API incluyendo la clave API
-    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
+    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${page}`;
   //Realiza la solicitud GET a la API de The Movie DB
     return fetch(url)
       .then(response => {
@@ -31,7 +52,14 @@ export function getMovies(): Promise<Movie[]> { //funcion para obtener datos de 
       .then(data => { 
         //Mapea los datos de las peliculas de la API al modelo de negocio Movie utilizando formatMovie
         const movies: Movie[] = data.results.map( (apiMovie: apiMovieData) => formatMovie(apiMovie) );
-        return movies; //Retorna el array de peliculas trasnformadas
+        const metaData = {
+          pagination: {
+            currenPage: data.page,
+            totalPages: data.total_pages,
+        }
+      }
+
+        return {metaData,movies}; //Retorna el array de peliculas trasnformadas
       })
       .catch(error => {
       throw error; 
