@@ -43,12 +43,12 @@ describe('getMovies', () => {
       ];
     fetchMock.mockResponseOnce(JSON.stringify(mockMovies));
 
-    return getMovies(({ filters: { page: 1 } }))
+    return getMovies({ filters: { page: 1 } })
     .then( response =>{
       expect(fetchMock).toHaveBeenCalledWith(
-        'https://api.themoviedb.org/3/discover/movie?api_key=mock_api_key'
+        `https://api.themoviedb.org/3/discover/movie?api_key=mock_api_key&page=${1}`
       );
-      expect(response).toEqual(responseMovies);
+      expect(response.movies).toEqual(responseMovies);
     });
   });
   it('debería manejar errores de red correctamente', () => {
