@@ -36,7 +36,10 @@ describe("MovieList", () => {
     // Verifica que se renderice cada película usando MovieCard
     moviesData.forEach((movie) => {
       expect(screen.getByText(movie.title)).toBeTruthy();
-      expect(screen.getByText(movie.releaseYear)).toBeTruthy();
+      //Verifica que el año de lanzamiento este en el formato correcto
+      const releaseYear = movie.releaseYear ? new Date(movie.releaseYear).getFullYear() : "Release year not available";
+      expect(screen.getByText(String(releaseYear))).toBeTruthy();
+
       expect(screen.getByAltText(`${movie.title} poster`)).toBeTruthy();
     });
   });
@@ -61,10 +64,10 @@ describe("MovieList", () => {
       },
       {
           id: 4,
-          releaseYear: "2023",
-          backdrop_path: "/no_title_backdrop.jpg",
           title: '',
+          backdrop_path: "/no_title_backdrop.jpg",
           poster: '',
+          releaseYear: "2023",
           genre: [],
           rating: 0
       },
