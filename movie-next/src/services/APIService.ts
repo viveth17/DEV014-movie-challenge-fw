@@ -5,8 +5,6 @@ import Movie from "../models/Movie";
 // import dotenv from 'dotenv'; //para acceder a la variable de entorno (importar 'dotenv')
 import { apiMovieData } from "../models/ApiMovieData";
 
-// dotenv.config(); //configuracion 
-// console.log('API Key:', process.env.REACT_APP_API_KEY);
 
 
 const BASE_URL = 'https://api.themoviedb.org/3';

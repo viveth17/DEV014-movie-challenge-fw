@@ -11,29 +11,27 @@ describe('Home', () => {
     fetchMock.resetMocks(); // Reiniciar mocks antes de cada prueba
   });
 
-  it('should display movies when data is fetched successfully', async () => {
-    const mockMovies = [
-      {
-        id: 1,
-        title: 'Godzilla x Kong: The New Empire',
-        releaseYear: '2024-03-27',
-        backdrop_path: '/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg',
-        poster: '',
-        genre: [],
-        rating: 0
-      },
-      {
-        id: 2,
-        title: 'Inception',
-        releaseYear: '2010',
-        backdrop_path: '/inception_backdrop.jpg',
-        poster: '',
-        genre: [],
-        rating: 0
-      }
-    ];
+  it('debería mostrar las películas cuando los datos se obtienen exitosamente', async () => {
 
-    fetchMock.mockResponseOnce(JSON.stringify({ movies: mockMovies }));
+    const mockMovies = {
+
+      page: 1,
+      total_pages: 10,
+      results: [
+        {
+          genre_ids: [878, 28, 12],
+          poster_path: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
+          release_date: "2024-03-27",
+          title: "Godzilla x Kong: The New Empire",
+          vote_average: 7.261,
+          backdrop_path: "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg",
+          id: 929590
+
+        }
+      ]
+    };
+
+    fetchMock.mockResponseOnce(JSON.stringify(mockMovies));
 
     render(<Home />);
 
@@ -46,14 +44,12 @@ describe('Home', () => {
       expect(screen.queryAllByText('Loading...').length).toBe(0);
 
       // Verificar que se renderice correctamente la lista de películas
-      mockMovies.forEach(movie => {
-      expect(screen.getByText(movie.title)).toBeInTheDocument();
-      // expect(screen.getByText('Inception')).toBeInTheDocument();
+      expect(screen.getByText('Godzilla x Kong: The New Empire')).toBeInTheDocument();
+
     });
   });
-});
 
-  it('should handle API error and display error message', async () => {
+  it('debería manejar errores de la API y mostrar un mensaje de error', async () => {
     fetchMock.mockRejectOnce(new Error('Failed to fetch'));
 
     render(<Home />);
@@ -67,6 +63,9 @@ describe('Home', () => {
       expect(screen.queryAllByText('Loading...').length).toBe(0);
 
       // Verificar que se muestre el modal de error
+      expect(screen.getByText('An error occurred while fetching data from the API.')).toBeInTheDocument();
+
+      // Verificar que se renderice correctamente el error de la modal
       expect(screen.getByText('An error occurred while fetching data from the API.')).toBeInTheDocument();
     });
   });
