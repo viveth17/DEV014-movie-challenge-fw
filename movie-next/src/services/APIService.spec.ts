@@ -15,12 +15,15 @@ describe('getMovies', () => {
   });
 
 
-  it('Debería devolver una lista de peliculas', () => {  // Primer caso de la prueba 
+  it('Debería devolver una lista de peliculas para la primera página', () => {  // Primer caso de la prueba 
     // Simular la respuesta de la API 
 
     const mockMovies = {
-      results:[
-        {
+
+          page: 1, 
+          total_pages: 10,
+          results: [
+            {
           genre_ids: [878, 28, 12],
           poster_path: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
           release_date: "2024-03-27",
@@ -49,8 +52,50 @@ describe('getMovies', () => {
         `https://api.themoviedb.org/3/discover/movie?api_key=mock_api_key&page=${1}`
       );
       expect(response.movies).toEqual(responseMovies);
+      expect(response.metaData.pagination.currenPage).toBe(1);
+      expect(response.metaData.pagination.totalPages).toBe(10);
     });
   });
+  it('Debería devolver una lista de películas para la segunda página', () => {
+    const mockMovies = {
+      page: 2,
+      total_pages: 10,
+      results: [
+        {
+          genre_ids: [878, 28, 12],
+          poster_path: "/another_poster.jpg",
+          release_date: "2024-03-27",
+          title: "Another Movie",
+          vote_average: 6.5,
+          backdrop_path: "/another_backdrop.jpg"
+        }
+      ]
+    };
+
+    const responseMovies = [
+      {
+        genre: [878, 28, 12],
+        poster: "/another_poster.jpg",
+        releaseYear: "2024-03-27",
+        title: "Another Movie",
+        rating: 6.5,
+        backdrop_path: "/another_backdrop.jpg"
+      }
+    ];
+
+    fetchMock.mockResponseOnce(JSON.stringify(mockMovies));
+
+    return getMovies({ filters: { page: 2 } })
+      .then(response => {
+        expect(fetchMock).toHaveBeenCalledWith(
+          `https://api.themoviedb.org/3/discover/movie?api_key=mock_api_key&page=2`
+        );
+        expect(response.movies).toEqual(responseMovies);
+        expect(response.metaData.pagination.currenPage).toBe(2);
+        expect(response.metaData.pagination.totalPages).toBe(10);
+      });
+  });
+
   it('debería manejar errores de red correctamente', () => {
 
     fetchMock.mockRejectOnce(new Error('Failed to fetch'));

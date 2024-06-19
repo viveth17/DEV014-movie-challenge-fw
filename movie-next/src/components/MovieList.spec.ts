@@ -67,7 +67,7 @@ describe("MovieList", () => {
           title: '',
           backdrop_path: "/no_title_backdrop.jpg",
           poster: '',
-          releaseYear: "2023",
+          releaseYear: "01-01-2022",
           genre: [],
           rating: 0
       },
@@ -80,6 +80,6 @@ describe("MovieList", () => {
     expect(screen.getByText(/Release year not available/i)).toBeInTheDocument();
 
     expect(screen.getByAltText(/No title available poster/i)).toBeInTheDocument();
-    expect(screen.getByText("2023")).toBeInTheDocument();
+    expect(screen.getByText("2022")).toBeInTheDocument();
   });
 });
