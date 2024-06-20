@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   // useEffect para simular la carga de datos
   useEffect(() => {
     // Simular un tiempo de respuesta de la API con un retraso de 1 segundos
-    const delay = 1000;
+    const delay = 0;
     // Aquí se hace una llamada a la API para obtener los datos de las películas
     setTimeout(() => {
       getMovies({ filters: { page: 1 } })
