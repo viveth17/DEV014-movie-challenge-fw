@@ -3,6 +3,7 @@
   grid-template-rows: 1fr 80px;
   height: 207px;
   width: 330px;
+  cursor: pointer;
 }
 
 .image-container {
@@ -99,6 +100,10 @@ body {
   color: #888;
 }
 
+/* Pagination */
+.MuiPaginationItem-ellipsis {
+  color: #FFFFFF !important;
+}
 
 
 

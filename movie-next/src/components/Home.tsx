@@ -21,25 +21,25 @@ const Home: React.FC = () => {
   //hook de react-router-dom para gestionar los parámetros de búsqueda en la URL
   const [searchParams, setSearchParams] = useSearchParams();
 
-    // Extraer la página actual de los parámetros de búsqueda, por defecto será 1
-    //searchParamas.get('page') Obtiene el valor del párametro 'page' de la Url
-    const currentPage = parseInt(searchParams.get('page') || '1', 10);
-    const [totalPages, setTotalPages] = useState(0);  // Estado para el total de páginas 
+  // Extraer la página actual de los parámetros de búsqueda, por defecto será 1
+  //searchParamas.get('page') Obtiene el valor del párametro 'page' de la Url
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+  const [totalPages, setTotalPages] = useState(0);  // Estado para el total de páginas 
 
   // Función para manejar el cambio de página
   const handlePageChange = (page: number) => {
-    setSearchParams({page: page.toString()}); // Actualiza URL con el nuevo número de página, 
+    setSearchParams({ page: page.toString() }); // Actualiza URL con el nuevo número de página, 
     //toString: Convierte el valor de 'page' que es un número a una cadena de texto 
   };
- 
+
   // useEffect para simular la carga de datos
   useEffect(() => {
- 
+
     const fetchMovies = async (page: number) => {
       try {
         setIsLoading(true);
         const response = await getMovies({ filters: { page } });
-        setMovies(response.movies); 
+        setMovies(response.movies);
         setTotalPages(response.metaData.pagination.totalPages);
         setIsLoading(false);
       } catch (error) {
