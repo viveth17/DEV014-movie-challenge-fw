@@ -2,6 +2,7 @@ import React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
+import styles from '../styles/Pagination.module.css';
 
 // Definición de la interfaz para los props del componente
 interface PaginationProps {
@@ -19,7 +20,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPage
     };
     // Renderizado de paginación
     return (
-        <Stack spacing={2} sx={{ alignItems: 'center', marginTop: '20px' }} >
+        <Stack spacing={2} className={styles.container} >
             <Pagination
                 count={totalPages}
                 page={currentPage}
@@ -32,26 +33,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPage
                             (item.type === 'previous' && currentPage === 1) ||
                             (item.type === 'next' && currentPage === totalPages)
                         }
-                        sx={{
-                            color: item.selected ? '#000000' : '#FFFFFF', // Número de página seleccionada (negro) y no seleccionada (blanco)
-                            width: '57px',
-                            height: '45px',
-                            borderRadius: '5px',
-                            margin: '5px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            cursor: 'pointer',
-                            backgroundColor: item.selected ? '#FFFFFF' : 'rgba(255, 255, 255, 0.15)', // Fondo de página seleccionada (blanco) y no seleccionada (con opacidad 15%)
-                            '&.Mui-selected': {
-                                backgroundColor: '#FFFFFF', // Fondo blanco para la página seleccionada
-                                color: '#000000', // Texto negro para la página seleccionada
-                            },
-                            '&.MuiPaginationItem-ellipsis': {
-                                backgroundColor: 'rgba(255, 255, 255, 0.15)', // Fondo para el botón "..."
-                                color: '#FFFFFF', // Color del texto para el botón "..."
-                            },
-                        }}
+                        className={`${styles.paginationItem} ${item.selected ? styles.paginationItemSelected : ''} ${(item.type === 'start-ellipsis' || item.type === 'end-ellipsis') ? styles.paginationItemDisabled : ''}`}
                     />
                 )}
             />

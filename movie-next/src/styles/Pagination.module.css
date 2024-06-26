@@ -1,0 +1,27 @@
+.container {
+    align-items: center;
+    margin-top: 20px;
+}
+
+.paginationItem {
+    width: 57px !important ;
+    height: 45px !important ;
+    border-radius: 5px !important ;
+    margin: 5px!important ;
+    display: flex !important ;
+    justify-content: center !important ;
+    align-items: center !important ;
+    cursor: pointer !important ;
+    color: #FFFFFF !important ;
+    background-color: rgba(255, 255, 255, 0.15) !important ;
+}
+
+.paginationItemSelected {
+    color: #000000 !important ;
+    background-color: #FFFFFF !important ;
+}
+
+.paginationItemDisabled {
+    background-color: rgba(255, 255, 255, 0.15) !important ;
+    color: #FFFFFF !important ;
+}
