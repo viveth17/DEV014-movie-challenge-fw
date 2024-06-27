@@ -14,3 +14,24 @@ export function formatMovie(apiMovieData: apiMovieData): Movie {
 
   return formattedMovie;
 }
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+export function formatGenresToMap(genres: Genre[]): Map<number, string> {
+  const genresMap = new Map<number, string>();
+
+   // Verifica si el arreglo de géneros está vacío
+   if (genres.length === 0) {
+    return genresMap; // Devuelve un Map vacío directamente
+}
+
+  genres.forEach(genre => {
+      genresMap.set(genre.id, genre.name);
+      console.log(`Agregado género: ID ${genre.id} - Nombre ${genre.name}`);
+  });
+
+  return genresMap;
+}
