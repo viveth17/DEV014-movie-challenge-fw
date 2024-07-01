@@ -1,0 +1,26 @@
+/* ListOptions.module.css */
+.container {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.selectContainer {
+    margin-bottom: 10px;
+}
+
+.selectedOption {
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.clearButton {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
