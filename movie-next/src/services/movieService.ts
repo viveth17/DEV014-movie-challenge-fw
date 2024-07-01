@@ -20,12 +20,12 @@ export async function getMovieGenres(): Promise<Genre[]> {
     // Realiza la solicitud GET a la API de The Movie DB
     try {
         const response = await fetch(url);
-        console.log('Response:', response); // Log de la respuesta completa
+        // console.log('Response:', response); // Log de la respuesta completa
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log('Data:', data); // Log de los datos JSON
+        // console.log('Data:', data); // Log de los datos JSON
 
 
         // Verifica que el campo 'genres' exista en la respuesta

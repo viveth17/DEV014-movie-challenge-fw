@@ -23,6 +23,9 @@ const Home: React.FC = () => {
   //hook de react-router-dom para gestionar los parámetros de búsqueda en la URL
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [genresMap, setGenresMap] = useState<Map<number, string>>(new Map());
+
+
   // Extraer la página actual de los parámetros de búsqueda, por defecto será 1
   //searchParamas.get('page') Obtiene el valor del párametro 'page' de la Url
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
@@ -45,8 +48,11 @@ const Home: React.FC = () => {
     const fetchMovies = async (page: number) => {
       try {
         setIsLoading(true);
-        const genres = formatGenresToMap(await getMovieGenres());
-        const response = await getMovies({ filters: { page } }, genres);
+        const genres = await getMovieGenres();
+        console.log('Generos encontrados:', genres); 
+        const genresMap = formatGenresToMap(genres);
+        setGenresMap(genresMap); // actualizando el estado de genresMap
+        const response = await getMovies({ filters: { page } }, genresMap);
         setMovies(response.movies);
         setTotalPages(response.metaData.pagination.totalPages);
         setIsLoading(false);
@@ -84,7 +90,7 @@ const Home: React.FC = () => {
       )}
       {!isLoading && !error && (
         <div>
-          <MovieList movies={movies} />
+          <MovieList movies={movies} genresMap={genresMap} />
           <PaginationComponent // Renderiza el componente de paginación
             currentPage={currentPage}
             totalPages={totalPages}

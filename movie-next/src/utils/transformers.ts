@@ -39,7 +39,7 @@ export function formatGenresToMap(genres: Genre[]): Map<number, string> {
 
   genres.forEach(genre => {
       genresMap.set(genre.id, genre.name);
-      console.log(`Agregado género: ID ${genre.id} - Nombre ${genre.name}`);
+      // console.log(`Agregado género: ID ${genre.id} - Nombre ${genre.name}`);
   });
 
   return genresMap;
