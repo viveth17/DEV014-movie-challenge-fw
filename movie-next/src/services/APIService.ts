@@ -27,7 +27,7 @@ interface MoviesResponse {
   movies: Movie[];
 }
 
-export function getMovies(params : GetMoviesParams): Promise<MoviesResponse> { //funcion para obtener datos de peliculas desde el endpoint (Devuelve una Promise que resuelve un array de objetos de tipo Movie)
+export function getMovies(params : GetMoviesParams, genresMap:  Map<number, string>): Promise<MoviesResponse> { //funcion para obtener datos de peliculas desde el endpoint (Devuelve una Promise que resuelve un array de objetos de tipo Movie)
 
   const { filters } = params; //Desestructuracion para obtner el objeto filters
   const page = filters?.page || 1; // Valor por defecto de 1 si filters.page no está definido o es null/undefined
@@ -49,7 +49,7 @@ export function getMovies(params : GetMoviesParams): Promise<MoviesResponse> { /
       })
       .then(data => { 
         //Mapea los datos de las peliculas de la API al modelo de negocio Movie utilizando formatMovie
-        const movies: Movie[] = data.results.map( (apiMovie: apiMovieData) => formatMovie(apiMovie) );
+        const movies: Movie[] = data.results.map( (apiMovie: apiMovieData) => formatMovie(apiMovie, genresMap) );
         const metaData = {
           pagination: {
             currenPage: data.page,

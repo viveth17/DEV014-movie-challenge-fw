@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import MovieList from './MovieList';
 import Movie from '../models/Movie';
 import { getMovies } from '../services/APIService';
+import { getMovieGenres } from '../services/movieService';
+import { formatGenresToMap } from '../utils/transformers';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Spinner, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Spinner, Modal, ModalHeader, ModalBody, ModalFooter, Button, Fade } from 'reactstrap';
 import PaginationComponent from './Pagination';
 import { useSearchParams } from 'react-router-dom';
 
@@ -32,13 +34,19 @@ const Home: React.FC = () => {
     //toString: Convierte el valor de 'page' que es un número a una cadena de texto 
   };
 
-  // useEffect para simular la carga de datos
+  // useEffect para obtener las películas
   useEffect(() => {
+    // const genresMap: Map<number, string> = new Map<number, string>([
+    //   [28, 'Action'],
+    //   [12, 'Adventure'],
+    //   [16, 'Animation'],
+    // ]);
 
     const fetchMovies = async (page: number) => {
       try {
         setIsLoading(true);
-        const response = await getMovies({ filters: { page } });
+        const genres = formatGenresToMap(await getMovieGenres());
+        const response = await getMovies({ filters: { page } }, genres);
         setMovies(response.movies);
         setTotalPages(response.metaData.pagination.totalPages);
         setIsLoading(false);
@@ -65,7 +73,9 @@ const Home: React.FC = () => {
         <div className='App'>
           <Modal isOpen={showModal} toggle={() => setShowModal(!showModal)}>
             <ModalHeader toggle={() => setShowModal(!showModal)}>Error</ModalHeader>
-            <ModalBody>{errorMessage}</ModalBody>
+            <Fade>
+              <ModalBody>{errorMessage}</ModalBody>
+            </Fade>
             <ModalFooter>
               <Button color='secondary' onClick={() => setShowModal(!showModal)}>Close</Button>
             </ModalFooter>

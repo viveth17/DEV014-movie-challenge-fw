@@ -1,12 +1,25 @@
 import Movie from '../models/Movie';
 import { apiMovieData } from '../models/ApiMovieData';
 
-export function formatMovie(apiMovieData: apiMovieData): Movie {
+interface Genre {
+  id: number;
+  name: string;
+}
+
+export function formatMovie(apiMovieData: apiMovieData, genresMap:  Map<number, string>): Movie {
+
+  // Verifica si genre_ids está definido; si no, asigna un arreglo vacío
+  const genreIds = apiMovieData.genre_ids || [];
+  
+  // Mapea los IDs de género a nombres usando el genresMap
+  const genres = genreIds.map(id => genresMap.get(id) || 'Unknown');
+  // const genres = apiMovieData.genre_ids?.map(id => genresMap.get(id) || 'Unknown') || [];
+
   const formattedMovie: Movie = {
     title: apiMovieData.title,
     poster: apiMovieData.poster_path,
     releaseYear: apiMovieData.release_date,
-    genre: apiMovieData.genre_ids,
+    genres, // cambiando de genre a genres
     rating: apiMovieData.vote_average,
     id: apiMovieData.id,
     backdrop_path : apiMovieData.backdrop_path
@@ -15,10 +28,6 @@ export function formatMovie(apiMovieData: apiMovieData): Movie {
   return formattedMovie;
 }
 
-interface Genre {
-  id: number;
-  name: string;
-}
 
 export function formatGenresToMap(genres: Genre[]): Map<number, string> {
   const genresMap = new Map<number, string>();

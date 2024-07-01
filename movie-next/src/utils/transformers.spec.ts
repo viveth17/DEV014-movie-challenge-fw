@@ -1,8 +1,20 @@
-import { formatMovie } from "../utils/transformers"; //importacion de la funcion a poner a prueba
+import { formatMovie, formatGenresToMap } from "../utils/transformers"; //importacion de la funcion a poner a prueba
 import { apiMovieData } from "../models/ApiMovieData"; //importacion del tipo de datos de la API
 import Movie from "../models/Movie"; //Importacion de el modelo de negocio Movie
 
-describe ('formatMovie', () =>{  //Descripcion de las pruebas para formatMovie
+
+describe ('formatMovie', () => {  //Descripcion de las pruebas para formatMovie
+
+   // Simula la respuesta de la API de géneros
+   const genresFromApi = [
+    { id: 878, name: 'Science Fiction' },
+    { id: 28, name: 'Action' },
+    { id: 12, name: 'Adventure' }
+  ];
+
+  // Genera el Map de géneros
+  const genresMap = formatGenresToMap(genresFromApi);
+
     it('Debería transformar los datos de la API al modelo Movie', () => { // Primer caso de prueba
 
     const apiData: apiMovieData = { //Definir datos de ejemplo de la API
@@ -23,17 +35,17 @@ describe ('formatMovie', () =>{  //Descripcion de las pruebas para formatMovie
         title:  "Godzilla x Kong: The New Empire",
         poster: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
         releaseYear: "2024-03-27",
-        genre: [
-            878,
-            28,
-            12
+        genres: [
+            "Science Fiction",
+            "Action",
+            "Adventure"
         ],
         rating:  7.261,
         id :  823464,
         backdrop_path : "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg"
       };
   
-      const formattedMovie = formatMovie(apiData); //Llamado de la funcion formatMovie con los datos de la API
+      const formattedMovie = formatMovie(apiData, genresMap); //Llamado de la funcion formatMovie con los datos de la API
   
       expect(formattedMovie).toEqual(expectedMovie); //Comprobacion de que el resultado de la funcion sea igual al objeto esperado
     });
@@ -48,11 +60,13 @@ describe ('formatMovie', () =>{  //Descripcion de las pruebas para formatMovie
         title: 'Pelicula de ejemplo incompleta',
         poster: undefined,
         releaseYear: undefined,
-        genre: undefined,
-        rating: undefined
+        genres: [], //si no hay géneros será un array vacío
+        rating: undefined,
+        id : undefined,
+        backdrop_path: undefined
       };
     // Llamado de la funcion formatMovie con los datos parciales de la API
-      const formattedMovie = formatMovie(apiData as apiMovieData);
+      const formattedMovie = formatMovie(apiData as apiMovieData, genresMap);
     //Comprobacion de que el resultado de la funcion sea igual al objeto esperado
       expect(formattedMovie).toEqual(expectedMovie);
     });

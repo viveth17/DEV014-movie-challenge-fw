@@ -32,7 +32,7 @@ export async function getMovieGenres(): Promise<Genre[]> {
         if (!data.genres) {
             throw new Error('No genres found in response');
         }
-        console.log('Genres:', data.genres); // Log de la lista de géneros
+        // console.log('Genres:', data.genres); // Log de la lista de géneros
         return data.genres;
     } catch (error) {
         console.error('Error fetching movie genres:', error);
