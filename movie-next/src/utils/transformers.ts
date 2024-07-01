@@ -44,3 +44,13 @@ export function formatGenresToMap(genres: Genre[]): Map<number, string> {
 
   return genresMap;
 }
+
+export function formatGenresToOptions(genres: Genre[]): { value: string, label: string }[] {
+  if (genres.length === 0) {
+    return []; // Devuelve un arreglo vacío si no hay géneros que convertir 
+  }
+  return genres.map(genre => ({
+    value: genre.id.toString(), // convertir el id a string
+    label: genre.name
+  }));
+}
