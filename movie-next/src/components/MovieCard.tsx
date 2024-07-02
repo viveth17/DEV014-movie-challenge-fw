@@ -10,7 +10,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie}) => {
     const releaseYear = movie.releaseYear ? new Date(movie.releaseYear).getFullYear() : "Fecha de estreno no disponible";
 
      // Verificar los géneros disponibles
-     console.log("Generos disponibles:", movie.genres);
+    //  console.log("Generos disponibles:", movie.genres);
 
      // Construir la cadena de géneros separados por comas
     const genres = movie.genres?.join(", ") || "Géneros no disponibles";

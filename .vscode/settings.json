@@ -1,0 +1,13 @@
+{
+    "conventionalCommits.scopes": [
+        "MovieCard",
+        "MovieList ",
+        "Home",
+        "App",
+        "APIService",
+        "Pagination",
+        "movieService",
+        "transformers",
+        "ListOptions"
+    ]
+}

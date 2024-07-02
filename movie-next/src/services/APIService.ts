@@ -14,13 +14,15 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 interface GetMoviesParams {
   filters: {
     page: number;
+    genreId?: number | null; // parámetro para filtrar por ID de género
+    sortBy?: string | null; // parámetro para ordenar 
   }
 }
 
 interface MoviesResponse {
   metaData: {
     pagination: {
-      currenPage: number;
+      currentPage: number;
       totalPages: number;
     }
   }
@@ -29,15 +31,27 @@ interface MoviesResponse {
 
 export function getMovies(params : GetMoviesParams, genresMap:  Map<number, string>): Promise<MoviesResponse> { //funcion para obtener datos de peliculas desde el endpoint (Devuelve una Promise que resuelve un array de objetos de tipo Movie)
 
-  const { filters } = params; //Desestructuracion para obtner el objeto filters
-  const page = filters?.page || 1; // Valor por defecto de 1 si filters.page no está definido o es null/undefined
+  const {filters } = params; //Desestructuracion para obtner el objeto filters
+  const {page, genreId = null, sortBy = null } = filters; // Desestructuación para obtener los valores de page, genreId y sortBy
+  //establecer valores predeterminados de null para genreId y sortBy
 
     if (!API_KEY) { //verifica API_KEY esté definida en las variables de entorno
       throw new Error('API_KEY not found in environment variables');
     }
 
   //construye la URL de la API incluyendo la clave API
-    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${page}`;
+    let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${page}`;
+    
+// Agregar genreId a la URL si está definido
+if (genreId !==  null) {
+  url += `&with_genres=${genreId}`;
+}
+
+// Agregar sortBy a la URL si está definido
+if (sortBy) {
+  url += `&sort_by=${sortBy}`;
+}
+
   //Realiza la solicitud GET a la API de The Movie DB
     return fetch(url)
       .then(response => {
@@ -52,7 +66,7 @@ export function getMovies(params : GetMoviesParams, genresMap:  Map<number, stri
         const movies: Movie[] = data.results.map( (apiMovie: apiMovieData) => formatMovie(apiMovie, genresMap) );
         const metaData = {
           pagination: {
-            currenPage: data.page,
+            currentPage: data.page,
             totalPages: data.total_pages,
         }
       }

@@ -3,11 +3,12 @@ import MovieList from './MovieList';
 import Movie from '../models/Movie';
 import { getMovies } from '../services/APIService';
 import { getMovieGenres } from '../services/movieService';
-import { formatGenresToMap } from '../utils/transformers';
+import { formatGenresToMap, formatGenresToOptions } from '../utils/transformers';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner, Modal, ModalHeader, ModalBody, ModalFooter, Button, Fade } from 'reactstrap';
 import PaginationComponent from './Pagination';
 import { useSearchParams } from 'react-router-dom';
+import ListOptions from '../components/ListOptions';
 
 const Home: React.FC = () => {
   //componente de modo cargando
@@ -25,6 +26,9 @@ const Home: React.FC = () => {
 
   const [genresMap, setGenresMap] = useState<Map<number, string>>(new Map());
 
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);  // Estado para género seleccionado
+  const [sortBy, setSortBy] = useState<string | null>(null);  // Estado para ordenamiento
+
 
   // Extraer la página actual de los parámetros de búsqueda, por defecto será 1
   //searchParamas.get('page') Obtiene el valor del párametro 'page' de la Url
@@ -37,6 +41,23 @@ const Home: React.FC = () => {
     //toString: Convierte el valor de 'page' que es un número a una cadena de texto 
   };
 
+  const handleGenreChange = (option: { value: string; label: string } | null) => {
+    const genreId = option ? parseInt(option.value) : null;
+    setSelectedGenre(genreId);
+  };
+
+  const handleSortChange = (option: { value: string; label: string } | null) => {
+    setSortBy(option ? option.value : null);
+  };
+
+  const handleClearGenre = () => {
+    setSelectedGenre(null);
+  };
+
+  const handleClearSort = () => {
+    setSortBy(null);
+  };
+
   // useEffect para obtener las películas
   useEffect(() => {
     // const genresMap: Map<number, string> = new Map<number, string>([
@@ -45,14 +66,14 @@ const Home: React.FC = () => {
     //   [16, 'Animation'],
     // ]);
 
-    const fetchMovies = async (page: number) => {
+    const fetchMovies = async (page: number, genreId: number | null, sortBy: string | null) => {
       try {
         setIsLoading(true);
         const genres = await getMovieGenres();
-        console.log('Generos encontrados:', genres); 
+        // console.log('Generos encontrados:', genres); 
         const genresMap = formatGenresToMap(genres);
         setGenresMap(genresMap); // actualizando el estado de genresMap
-        const response = await getMovies({ filters: { page } }, genresMap);
+        const response = await getMovies({ filters: { page, genreId, sortBy } }, genresMap);
         setMovies(response.movies);
         setTotalPages(response.metaData.pagination.totalPages);
         setIsLoading(false);
@@ -64,8 +85,17 @@ const Home: React.FC = () => {
       }
     };
 
-    fetchMovies(currentPage); // Llama a fetchMovies cuando se carga el componente y cada vez que currentPage cambia
-  }, [currentPage]);
+    fetchMovies(currentPage, selectedGenre, sortBy); // Llama a fetchMovies cuando se carga el componente y cada vez que currentPage cambia
+  }, [currentPage, selectedGenre, sortBy])
+  
+  const genreArray = Array.from(genresMap, ([id, name]) => ({ id, name }));
+  const genreOptions = formatGenresToOptions(genreArray);
+
+  const sortOptions = [
+    { value: 'popularity.desc', label: 'Most Popular' },
+    { value: 'release_date.desc', label: 'Newest' },
+    { value: 'vote_average.desc', label: 'Top Rated' },
+  ];
 
   return (
     <div>
@@ -90,7 +120,19 @@ const Home: React.FC = () => {
       )}
       {!isLoading && !error && (
         <div>
-          <MovieList movies={movies} genresMap={genresMap} />
+          <ListOptions
+            options={genreOptions}
+            selectedOption={genreOptions.find(option => option.value === selectedGenre?.toString()) || null}
+            onChange={handleGenreChange}
+            onClear={handleClearGenre}
+          />
+          <ListOptions
+            options={sortOptions}
+            selectedOption={sortOptions.find(option => option.value === sortBy) || null}
+            onChange={handleSortChange}
+            onClear={handleClearSort}
+          />
+          <MovieList movies={movies} />
           <PaginationComponent // Renderiza el componente de paginación
             currentPage={currentPage}
             totalPages={totalPages}

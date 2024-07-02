@@ -1,6 +1,6 @@
 .movie-card {
   display: grid;
-  grid-template-rows: 1fr 80px;
+  grid-template-rows: 1fr 85px;
   height: 207px;
   width: 330px;
   cursor: pointer;
@@ -17,6 +17,11 @@
   color: #FFFFFF;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 21px;
+
 }
 
 .image-card {
@@ -33,12 +38,17 @@
   text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
 
 }
-.movie-genres{
+
+.movie-genres {
   margin: 0;
   font-size: 15px;
-  color: #FFFFFF;
+  color: #a6c7e4;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5); 
+  text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 26px;
 }
 
 .container-infoMovie {
