@@ -118,20 +118,22 @@ const Home: React.FC = () => {
       )}
       {!isLoading && !error && (
         <div>
-          <ListOptions
-            title="Filtrar por género:"
-            options={genreOptions}
-            selectedOption={genreOptions.find(option => option.value === selectedGenre?.toString()) || null}
-            onChange={handleGenreChange}
-            onClear={handleClearGenre}
-          />
-          <ListOptions
-            title="Ordenar por:"
-            options={sortOptions}
-            selectedOption={sortOptions.find(option => option.value === sortBy) || null}
-            onChange={handleSortChange}
-            onClear={handleClearSort}
-          />
+          <div className={styles.containerSelect}>
+            <ListOptions
+              title="Filtrar por género:"
+              options={genreOptions}
+              selectedOption={genreOptions.find(option => option.value === selectedGenre?.toString()) || null}
+              onChange={handleGenreChange}
+              onClear={handleClearGenre}
+            />
+            <ListOptions
+              title="Ordenar por:"
+              options={sortOptions}
+              selectedOption={sortOptions.find(option => option.value === sortBy) || null}
+              onChange={handleSortChange}
+              onClear={handleClearSort}
+            />
+          </div>
           <MovieList movies={movies} />
           <PaginationComponent // Renderiza el componente de paginación
             currentPage={currentPage}

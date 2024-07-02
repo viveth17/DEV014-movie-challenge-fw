@@ -36,15 +36,14 @@ export const ListOptions: React.FC<ListOptionsProps> = ({ title, options, select
                         </option>
                     ))}
                 </select>
-            </div>
-
             {/* Mostrar la opción seleccionada si existe */}
             {selectedOption && (
                 <div className={styles.selectedOption}>
                     {/* <span>Opción seleccionada: {selectedOption.label}: {selectedOption.value}</span> */}
-                    <button className={styles.clearButton} onClick={onClear}> Borrar selección</button>
+                    <button className={styles.clearButton} onClick={onClear}> Borrar</button>
                 </div>
             )}
+        </div>
         </div>
     );
 };

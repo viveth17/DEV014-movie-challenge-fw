@@ -21,7 +21,15 @@
   }
   
   .error {
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
-    color: #FFFFFF; /* Texto blanco */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #FFFFFF;
+  }
+  .containerSelect{
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 15px;
+    place-items: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
   }
   
