@@ -15,7 +15,7 @@ export async function getMovieGenres(): Promise<Genre[]> {
     }
 
     // Construye la URL de la API incluyendo la clave API
-    const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
+    const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=es-ES`;
 
     // Realiza la solicitud GET a la API de The Movie DB
     try {

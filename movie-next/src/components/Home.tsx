@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom';
 import ListOptions from '../components/ListOptions';
 import styles from '../styles/Home.module.css';
 import appStyles from '../styles/App.module.css';
-import movieListStyles from '../styles/MovieList.module.css';
+// import movieListStyles from '../styles/MovieList.module.css';
 
 
 const Home: React.FC = () => {
@@ -48,10 +48,29 @@ const Home: React.FC = () => {
   const handleGenreChange = (option: { value: string; label: string } | null) => {
     const genreId = option ? parseInt(option.value) : null;
     setSelectedGenre(genreId);
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      if (genreId !== null) {
+        newParams.set('genreId', genreId.toString());
+      } else {
+        newParams.delete('genreId');
+      }
+      return newParams;
+    });
   };
 
   const handleSortChange = (option: { value: string; label: string } | null) => {
-    setSortBy(option ? option.value : null);
+    const sortByValue = option ? option.value : null;
+    setSortBy(sortByValue);
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      if (sortByValue) {
+        newParams.set('sortBy', sortByValue);
+      } else {
+        newParams.delete('sortBy');
+      }
+      return newParams;
+    });
   };
 
   const handleClearGenre = () => {
@@ -90,9 +109,20 @@ const Home: React.FC = () => {
   const genreOptions = formatGenresToOptions(genreArray);
 
   const sortOptions = [
-    { value: 'popularity.desc', label: 'Most Popular' },
-    { value: 'release_date.desc', label: 'Newest' },
-    { value: 'vote_average.desc', label: 'Top Rated' },
+    { value: 'popularity.desc', label: 'Más popular Desc' }, //Más popular Desc
+    { value: 'popularity.asc', label: 'Más popular Asc' }, // Más popular Asc
+    { value: 'release_date.desc', label: 'Más reciente Desc' },//Más reciente Desc
+    { value: 'release_date.asc', label: 'Más reciente Asc' },//Más reciente Asc
+    { value: 'vote_average.desc', label: 'Mejor valoradas Desc' }, //Mejor valoradas Desc
+    { value: 'vote_average.asc', label: 'Mejor valoradas Asc ' }, //Mejor valoradas Asc 
+    { value: 'popularity.asc', label: 'Popularidad Asc' }, // Popularidad Asc
+    { value: 'popularity.desc', label: 'Popularidad Desc' }, // Popularidad Desc
+    { value: 'revenue.asc', label: 'Ingresos Asc' }, //Ingresos Asc
+    { value: 'revenue.desc', label: 'Ingresos Desc' }, // Ingresos Desc
+    { value: 'primary_release_date.asc', label: 'Fecha de lanzamiento Asc' }, //Fecha de lanzamiento Asc
+    { value: 'primary_release_date.desc', label: 'Fecha de lanzamiento Desc' }, // Fecha de lanzamiento Desc
+    { value: 'vote_average.asc', label: 'Promedio de votos Asc' }, //Promedio de votos Asc
+    { value: 'vote_average.desc', label: 'Promedio de votos Desc' }, // Promedio de votos Desc
   ];
 
   return (
