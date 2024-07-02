@@ -7,18 +7,21 @@ interface Option {
 }
 
 interface ListOptionsProps { // para almacenar las opciones a listar 
+    title: string;
     options: Option[]; //almacena las opciones que se listaran en el <select>
     selectedOption: Option | null; // almacen la opcion seleccionada actualmente o null si no hay ninguna seleccionada
     onChange: (option: Option | null) => void; //funcion que se ejecuta cuando se selecciona una opcion del <select>
     onClear: () => void; // funcion que se ejecuta cuando el usuario borra la seleccion actual 
 }
 
-export const ListOptions: React.FC<ListOptionsProps> = ({ options, selectedOption, onChange, onClear }) => {
+export const ListOptions: React.FC<ListOptionsProps> = ({ title, options, selectedOption, onChange, onClear }) => {
     return (
         <div className={styles.container}>
-            {/* Renderizar las opciones  */}
+            {/* Renderizar el titulo dinámiacamente  */}
+            <h3 className={styles.title}>{title}</h3>
             <div className={styles.selectContainer}>
                 <select
+                    className={styles.select}
                     value={selectedOption ? selectedOption.value : ''}
                     onChange={(e) => {
                         const selectedValue = e.target.value;
@@ -26,7 +29,7 @@ export const ListOptions: React.FC<ListOptionsProps> = ({ options, selectedOptio
                         onChange(option);
                     }}
                 >
-                    <option value="">--Selecciona una opción--</option>
+                    <option value=""></option>
                     {options.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.label}
@@ -38,7 +41,7 @@ export const ListOptions: React.FC<ListOptionsProps> = ({ options, selectedOptio
             {/* Mostrar la opción seleccionada si existe */}
             {selectedOption && (
                 <div className={styles.selectedOption}>
-                    <span>Opción seleccionada: {selectedOption.label}: {selectedOption.value}</span>
+                    {/* <span>Opción seleccionada: {selectedOption.label}: {selectedOption.value}</span> */}
                     <button className={styles.clearButton} onClick={onClear}> Borrar selección</button>
                 </div>
             )}

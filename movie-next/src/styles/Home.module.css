@@ -1,0 +1,27 @@
+
+
+.App {
+    color: #FFD600;
+    display: grid;
+    justify-content: center;
+    padding: 161px;
+    justify-items: center;
+  }
+  
+  .loading{
+    font-size: 22px;
+    font-family: monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 7px;
+    text-decoration: wavy;
+    letter-spacing: 1px;
+    color: #FFD600;
+    margin-left: 40px;
+  }
+  
+  .error {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
+    color: #FFFFFF; /* Texto blanco */
+  }
+  

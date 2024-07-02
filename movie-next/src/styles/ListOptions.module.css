@@ -1,28 +1,57 @@
-/* ListOptions.module.css */
 .container {
-    /* margin-top: 20px;
-    font-family: Arial, sans-serif; */
-    display: flex;
-    justify-content: flex-start;
+    /* display: flex;
+    justify-content: flex-start; */
+    margin-bottom: 20px;
+    /* Espacio inferior para separar cada ListOptions */
 }
 
 .selectContainer {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    display: inline-block;
+    /* Alinea el select en línea con el texto */
+    margin-left: 10px;
+    /* Espacio a la izquierda del select */
 }
 
 .selectedOption {
     margin-top: 10px;
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 5px; */
 }
 
 .clearButton {
     margin-left: 10px;
-    padding: 5px 10px;
+    /* padding: 5px 10px;
     background-color: #dc3545;
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: pointer; */
+}
+
+.title {
+    padding: 0px 20px;
+    font-size: 18px;
+    color: #FFFFFF;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.select {
+    /* width: 100%; Ancho completo del contenedor */
+    width: 200px;
+    height: 35px;
+    padding: 8px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: rgba(255, 255, 255, 0.15) !important; /* Color de fondo */
+    color: white; /* Color de texto */
+    outline: none; /* Elimina el contorno al enfocar */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+}
+
+.select:hover,
+.select:focus {
+    border-color: #007bff; /* Cambia el color del borde al pasar o enfocar */
 }

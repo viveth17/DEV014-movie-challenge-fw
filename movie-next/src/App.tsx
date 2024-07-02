@@ -12,8 +12,8 @@ function App() {
       <div className="app-container">
         <h1 className="main-title">MOVIE</h1>
       </div>
-      <div className='app-filters'>
-      </div>
+      {/* <div className='app-filters'>
+      </div> */}
       {/* Definicion de rutas y direcciones a sus componentes  */}
       <Routes>
         <Route path="/" element={<Home />} />

@@ -9,6 +9,10 @@ import { Spinner, Modal, ModalHeader, ModalBody, ModalFooter, Button, Fade } fro
 import PaginationComponent from './Pagination';
 import { useSearchParams } from 'react-router-dom';
 import ListOptions from '../components/ListOptions';
+import styles from '../styles/Home.module.css';
+import appStyles from '../styles/App.module.css';
+import movieListStyles from '../styles/MovieList.module.css';
+
 
 const Home: React.FC = () => {
   //componente de modo cargando
@@ -60,12 +64,6 @@ const Home: React.FC = () => {
 
   // useEffect para obtener las películas
   useEffect(() => {
-    // const genresMap: Map<number, string> = new Map<number, string>([
-    //   [28, 'Action'],
-    //   [12, 'Adventure'],
-    //   [16, 'Animation'],
-    // ]);
-
     const fetchMovies = async (page: number, genreId: number | null, sortBy: string | null) => {
       try {
         setIsLoading(true);
@@ -87,7 +85,7 @@ const Home: React.FC = () => {
 
     fetchMovies(currentPage, selectedGenre, sortBy); // Llama a fetchMovies cuando se carga el componente y cada vez que currentPage cambia
   }, [currentPage, selectedGenre, sortBy])
-  
+
   const genreArray = Array.from(genresMap, ([id, name]) => ({ id, name }));
   const genreOptions = formatGenresToOptions(genreArray);
 
@@ -98,17 +96,17 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div className={appStyles.root}>
       {isLoading && (
-        <div className='App'>
+        <div className={appStyles.root}>
           <Spinner />
-          <p className='loading-text'>Loading...</p>
+          <p className={appStyles.loading}>Loading...</p>
         </div>
       )}
       {error && (
-        <div className='App'>
+        <div className={appStyles.root}>
           <Modal isOpen={showModal} toggle={() => setShowModal(!showModal)}>
-            <ModalHeader toggle={() => setShowModal(!showModal)}>Error</ModalHeader>
+            <ModalHeader className={styles.error} toggle={() => setShowModal(!showModal)}>Error</ModalHeader>
             <Fade>
               <ModalBody>{errorMessage}</ModalBody>
             </Fade>
@@ -121,12 +119,14 @@ const Home: React.FC = () => {
       {!isLoading && !error && (
         <div>
           <ListOptions
+            title="Filtrar por género:"
             options={genreOptions}
             selectedOption={genreOptions.find(option => option.value === selectedGenre?.toString()) || null}
             onChange={handleGenreChange}
             onClear={handleClearGenre}
           />
           <ListOptions
+            title="Ordenar por:"
             options={sortOptions}
             selectedOption={sortOptions.find(option => option.value === sortBy) || null}
             onChange={handleSortChange}
