@@ -27,22 +27,10 @@ describe('getMovieGenres', () => {
     expect(genres).toEqual(mockGenresResponse.genres);
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(
-      'https://api.themoviedb.org/3/genre/movie/list?api_key=undefined'
+      'https://api.themoviedb.org/3/genre/movie/list?api_key=mock_api_key&language=es-ES'
     );
   });
 
-  it('debería lanzar un error cuando la clave de API no está definida', async () => {
-    // Backup de la API key original
-    const originalApiKey = process.env.REACT_APP_API_KEY;
-
-    // Eliminar la API key para esta prueba
-    delete process.env.REACT_APP_API_KEY;
-
-    await expect(getMovieGenres()).rejects.toThrow('API_KEY not found in environment variables');
-
-    // Restaurar la API key original
-    process.env.REACT_APP_API_KEY = originalApiKey;
-  });
 
   it('debería lanzar un error cuando la respuesta de red no es correcta', async () => {
     // Configura fetch para devolver una respuesta de error

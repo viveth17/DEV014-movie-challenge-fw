@@ -115,14 +115,10 @@ const Home: React.FC = () => {
     { value: 'release_date.asc', label: 'Más reciente Asc' },//Más reciente Asc
     { value: 'vote_average.desc', label: 'Mejor valoradas Desc' }, //Mejor valoradas Desc
     { value: 'vote_average.asc', label: 'Mejor valoradas Asc ' }, //Mejor valoradas Asc 
-    { value: 'popularity.asc', label: 'Popularidad Asc' }, // Popularidad Asc
-    { value: 'popularity.desc', label: 'Popularidad Desc' }, // Popularidad Desc
     { value: 'revenue.asc', label: 'Ingresos Asc' }, //Ingresos Asc
     { value: 'revenue.desc', label: 'Ingresos Desc' }, // Ingresos Desc
     { value: 'primary_release_date.asc', label: 'Fecha de lanzamiento Asc' }, //Fecha de lanzamiento Asc
     { value: 'primary_release_date.desc', label: 'Fecha de lanzamiento Desc' }, // Fecha de lanzamiento Desc
-    { value: 'vote_average.asc', label: 'Promedio de votos Asc' }, //Promedio de votos Asc
-    { value: 'vote_average.desc', label: 'Promedio de votos Desc' }, // Promedio de votos Desc
   ];
 
   return (

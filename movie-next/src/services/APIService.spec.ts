@@ -59,7 +59,7 @@ describe('getMovies', () => {
         `https://api.themoviedb.org/3/discover/movie?api_key=mock_api_key&page=${1}`
       );
       expect(response.movies).toEqual(responseMovies);
-      expect(response.metaData.pagination.currenPage).toBe(1);
+      expect(response.metaData.pagination.currentPage).toBe(1);
       expect(response.metaData.pagination.totalPages).toBe(10);
     });
   });
@@ -103,7 +103,7 @@ describe('getMovies', () => {
           `https://api.themoviedb.org/3/discover/movie?api_key=mock_api_key&page=2`
         );
         expect(response.movies).toEqual(responseMovies);
-        expect(response.metaData.pagination.currenPage).toBe(2);
+        expect(response.metaData.pagination.currentPage).toBe(2);
         expect(response.metaData.pagination.totalPages).toBe(10);
       });
   });
@@ -162,7 +162,7 @@ describe('getMovies', () => {
     return getMovies({ filters: { page: 1 } }, new Map())
       .then(response => {
         expect(response.movies).toEqual(responseMovies);
-        expect(response.metaData.pagination.currenPage).toBe(1);
+        expect(response.metaData.pagination.currentPage).toBe(1);
         expect(response.metaData.pagination.totalPages).toBe(10);
       });
   });
@@ -203,7 +203,7 @@ describe('getMovies', () => {
     return getMovies({ filters: { page: 1 } }, mockGenresMap)
       .then(response => {
         expect(response.movies).toEqual(responseMovies);
-        expect(response.metaData.pagination.currenPage).toBe(1);
+        expect(response.metaData.pagination.currentPage).toBe(1);
         expect(response.metaData.pagination.totalPages).toBe(10);
       });
   });

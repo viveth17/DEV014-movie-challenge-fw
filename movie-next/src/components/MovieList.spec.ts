@@ -12,7 +12,7 @@ const moviesData : Movie[] = [
       releaseYear: "2024-03-27",
       backdrop_path: "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg",
       poster: '',
-      genre: [],
+      genres: [],
       rating: 0
   },
   {
@@ -21,7 +21,7 @@ const moviesData : Movie[] = [
       releaseYear: "2010",
       backdrop_path: "/inception_backdrop.jpg",
       poster: '',
-      genre: [],
+      genres: [],
       rating: 0
   },
 ];
@@ -59,7 +59,7 @@ describe("MovieList", () => {
           backdrop_path: "/no_release_year_backdrop.jpg",
           poster: '',
           releaseYear: '',
-          genre: [],
+          genres: [],
           rating: 0
       },
       {
@@ -68,7 +68,7 @@ describe("MovieList", () => {
           backdrop_path: "/no_title_backdrop.jpg",
           poster: '',
           releaseYear: "01-01-2022",
-          genre: [],
+          genres: [],
           rating: 0
       },
     ];
@@ -77,9 +77,9 @@ describe("MovieList", () => {
 
     // Verifica que las películas sin título o año de estreno muestren el mensaje por defecto
     expect(screen.getByText(/Movie without release year/i)).toBeInTheDocument();
-    expect(screen.getByText(/Release year not available/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fecha de estreno no disponible/i)).toBeInTheDocument();
 
-    expect(screen.getByAltText(/No title available poster/i)).toBeInTheDocument();
+    expect(screen.getByAltText(/No title available/i)).toBeInTheDocument();
     expect(screen.getByText("2022")).toBeInTheDocument();
   });
 });

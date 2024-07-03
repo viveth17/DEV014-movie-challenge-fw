@@ -18,6 +18,7 @@ export async function getMovieGenres(): Promise<Genre[]> {
     const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=es-ES`;
 
     // Realiza la solicitud GET a la API de The Movie DB
+    // eslint-disable-next-line no-useless-catch
     try {
         const response = await fetch(url);
         // console.log('Response:', response); // Log de la respuesta completa
@@ -35,7 +36,6 @@ export async function getMovieGenres(): Promise<Genre[]> {
         // console.log('Genres:', data.genres); // Log de la lista de géneros
         return data.genres;
     } catch (error) {
-        console.error('Error fetching movie genres:', error);
         throw error;
     }
 }
