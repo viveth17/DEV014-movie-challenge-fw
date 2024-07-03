@@ -4,56 +4,67 @@ import  { MovieCard }  from "./MovieCard.tsx"; // importamos el componente a pro
 import Movie from "../models/Movie";
 import React from "react";
 
-
+//Datos de película son géneros
 const movieData : Movie = {
     title: "Godzilla x Kong: The New Empire",             
     releaseYear: "2024-03-27",
     backdrop_path : "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg",
-    genre: [
-        878,
-        12,
-        28
+    genres: [
+        "Science Fiction",
+        "Adventure",
+        "Action"
     ],
     id: 653346,
     poster: "/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",
     rating: 6.933
 };
 
+//Datos de la película sin géneros
+const movieDataWithoutGenres: Movie = {
+    title: "Godzilla x Kong: The New Empire",
+    poster: "/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",
+    releaseYear: "2024-03-27",
+    backdrop_path: "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg",
+    genres: [],
+    id: 653346,
+    rating: 6.933
+  };
+//Datos de película sin título
 const incompleteMovieDataWithoutTitle: Movie = {
     title: "", // Simulando que le falta el titulo
     releaseYear: "2024-03-27",
     backdrop_path: "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg",
-    genre: [
-        878,
-        12,
-        28
+    genres: [
+       "Science Fiction",
+        "Adventure",
+        "Action"
     ],
     id: 653346,
     poster: "/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",
     rating: 6.933
 };
 
-
+//Datos de película sin año de estreno 
 const incompleteMovieDataWithoutYear: Movie = {
     title: "Godzilla x Kong: The New Empire",
     releaseYear: "", // Simulando que le hace falta el año de estreno
     backdrop_path: "/xRd1eJIDe7JHO5u4gtEYwGn5wtf.jpg",
-    genre: [
-        878,
-        12,
-        28
+    genres: [
+        "Science Fiction",
+        "Adventure",
+        "Action"
     ],
     id: 653346,
     poster: "/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",
     rating: 6.933
 };
 
-
+//Datos de película vacíos 
 const emptyMovieData: Movie = {
     title: "",
     releaseYear: "",
     backdrop_path: "",
-    genre: [],
+    genres: [],
     id: 0,
     poster: "",
     rating: 0
@@ -85,7 +96,7 @@ describe('MovieCard', () => {
         render(React.createElement (MovieCard, {movie: incompleteMovieDataWithoutYear} ));
         
         // Verificamos el mensaje por defecto cuando falta el año de estreno
-        expect(screen.getByText(/Release year not available/i)).toBeTruthy();
+        expect(screen.getByText(/Fecha de estreno no disponible/i)).toBeTruthy();
     });
 
     it('debería renderizar mensajes por defecto y una imagen de reemplazo si todos los datos están vacíos', () => {
@@ -93,8 +104,23 @@ describe('MovieCard', () => {
         
         // Verificamos los mensajes por defecto y la imagen de reemplazo
         expect(screen.getByText(/No title available/i)).toBeTruthy();
-        expect(screen.getByText(/Release year not available/i)).toBeTruthy();
+        expect(screen.getByText(/Fecha de estreno no disponible/i)).toBeTruthy();
         expect(screen.getByAltText(/No image available/i)).toBeTruthy();
+    });
+
+    it ('debería renderizar correctamente los géneros de la película', () => {
+        render (React.createElement (MovieCard, { movie:  movieData } ));
+
+        //Verificamos que los géneros esten presentes 
+        expect(screen.getByText(/Science Fiction/i)).toBeTruthy();
+        expect(screen.getByText(/Adventure/i)).toBeTruthy();
+        expect(screen.getByText(/Action/i)).toBeTruthy();
+    });
+
+    it('debería renderizar un mensaje por defecto si no hay géneros disponibles', () => {
+        render (React.createElement (MovieCard, { movie:  movieDataWithoutGenres } ));
+        //verificamos el mensaje por defecto cuando no hay géneros
+        expect(screen.getByText(/Géneros no disponibles/i)).toBeTruthy();
     });
 
 }); 
