@@ -1,3 +1,8 @@
+import { apiMovieData } from "../models/ApiMovieData";
+import Movie from "../models/Movie";
+import { formatMovie, formatGenresToMap } from "../utils/transformers";
+
+
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -38,4 +43,34 @@ export async function getMovieGenres(): Promise<Genre[]> {
     } catch (error) {
         throw error;
     }
+}
+
+//Esta función hace una llamada a la API para obtener los detalles de la película por ID
+//La función debe devolver una Promise que resuelva un modelo de negocio Movie
+
+export async function getMovieDetail(id: number) : Promise<Movie>  {
+
+if (!API_KEY) {
+    throw new Error('API_KEY not found in environment variables');
+}
+
+const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=es-ES`;
+
+
+// eslint-disable-next-line no-useless-catch
+try {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data: apiMovieData = await response.json();
+
+    //Obtener los géneros
+    const genres = await getMovieGenres();
+    const genresMap = formatGenresToMap(genres);
+
+    return formatMovie(data, genresMap);
+} catch (error) {
+    throw error;
+}
 }
