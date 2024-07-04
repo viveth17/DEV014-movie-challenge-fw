@@ -22,7 +22,9 @@ export function formatMovie(apiMovieData: apiMovieData, genresMap:  Map<number, 
     genres, // cambiando de genre a genres
     rating: apiMovieData.vote_average,
     id: apiMovieData.id,
-    backdrop_path : apiMovieData.backdrop_path
+    backdrop_path : apiMovieData.backdrop_path,
+    overview : apiMovieData.overview,
+    original_title : apiMovieData.original_title
   };
 
   return formattedMovie;

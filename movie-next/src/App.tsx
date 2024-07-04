@@ -1,5 +1,6 @@
 import './App.css'
 import Home from './components/Home';
+import MovieDetail from './components/MovieDetail';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 //BrowserRouter) envuelve todo el contenido de la aplicación, proporcionando así el contexto de enrutamiento necesario para que Routes y Route funcionen correctamente
@@ -17,6 +18,8 @@ function App() {
       {/* Definicion de rutas y direcciones a sus componentes  */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        
       </Routes>
       {/* <MovieList movies={movies} /> */}
       <p role="paragraph" title="read-the-docs" className="read-the-docs">
