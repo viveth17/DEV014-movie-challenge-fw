@@ -71,6 +71,9 @@ try {
 
     return formatMovie(data, genresMap);
 } catch (error) {
+    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        throw new Error('Network request failed');
+      }
     throw error;
 }
 }
