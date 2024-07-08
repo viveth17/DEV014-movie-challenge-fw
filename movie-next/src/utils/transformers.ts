@@ -6,15 +6,23 @@ interface Genre {
   name: string;
 }
 
-export function formatMovie(apiMovieData: apiMovieData, genresMap:  Map<number, string>): Movie {
+export function formatMovie(apiMovieData: apiMovieData, genresMap:  Map<number, string>, isDetail: boolean): Movie {
 
-  // Verifica si genre_ids está definido; si no, asigna un arreglo vacío
+  let genres: string[];
+
+  if (isDetail === true) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    genres = apiMovieData.genres.map((element: any) => element.name);
+  } else {
+    // Verifica si genre_ids está definido; si no, asigna un arreglo vacío
   const genreIds = apiMovieData.genre_ids || [];
-  
   // Mapea los IDs de género a nombres usando el genresMap
-  const genres = genreIds.map(id => genresMap.get(id) || 'Unknown');
+  genres = genreIds.map(id => genresMap.get(id) || 'Unknown');
   // const genres = apiMovieData.genre_ids?.map(id => genresMap.get(id) || 'Unknown') || [];
+  }
+  
 
+  // console.log('genres', genres);
   const formattedMovie: Movie = {
     title: apiMovieData.title,
     poster: apiMovieData.poster_path,
@@ -22,9 +30,10 @@ export function formatMovie(apiMovieData: apiMovieData, genresMap:  Map<number, 
     genres, // cambiando de genre a genres
     rating: apiMovieData.vote_average,
     id: apiMovieData.id,
-    backdrop_path : apiMovieData.backdrop_path,
-    overview : apiMovieData.overview,
-    original_title : apiMovieData.original_title
+    backdrop_path: apiMovieData.backdrop_path,
+    overview: apiMovieData.overview,
+    original_title: apiMovieData.original_title,
+    poster_path: apiMovieData.poster_path
   };
 
   return formattedMovie;

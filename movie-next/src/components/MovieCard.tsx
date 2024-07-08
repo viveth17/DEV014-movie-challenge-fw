@@ -35,7 +35,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie}) => {
                     />
                 ) : (
                     <img
-                        src="/default-image.jpg"
+                        src="https://miro.medium.com/v2/resize:fit:1150/1*AC9frN1qFnn-I2JCycN8fw.png"
                         alt="No image available"
                         className="image-card"
                     />

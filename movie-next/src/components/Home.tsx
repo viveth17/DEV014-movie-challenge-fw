@@ -89,6 +89,7 @@ const Home: React.FC = () => {
         const genres = await getMovieGenres();
         // console.log('Generos encontrados:', genres); 
         const genresMap = formatGenresToMap(genres);
+        // console.log('genresMap:', genresMap); 
         setGenresMap(genresMap); // actualizando el estado de genresMap
         const response = await getMovies({ filters: { page, genreId, sortBy } }, genresMap);
         setMovies(response.movies);

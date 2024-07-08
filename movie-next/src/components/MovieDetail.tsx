@@ -5,9 +5,9 @@ import { getMovieDetail } from '../services/movieService';
 import styles from '../styles/MovieDetail.module.css';
 import { FaArrowLeft, FaStar } from 'react-icons/fa'; //  icono de flecha y estrella
 
-const MovieDetail: React.FC= () => {
+const MovieDetail: React.FC = () => {
 
-    const {id} = useParams<{id: string}>(); // para obtener el "id" de la url dinámicamente 
+    const { id } = useParams<{ id: string }>(); // para obtener el "id" de la url dinámicamente 
     const navigate = useNavigate(); //Hook para la navegación
 
     const [movie, setMovie] = useState<Movie | null>(null);
@@ -18,10 +18,11 @@ const MovieDetail: React.FC= () => {
         const fetchMovieDetail = async () => {
             try {
                 setLoading(true);
-                const movieDetail = await getMovieDetail(parseInt(id));
+                const movieDetail = await getMovieDetail(parseInt(id ?? '0'));
                 setMovie(movieDetail);
                 setLoading(false);
-            } catch (error) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error: any) {
                 setError(error.message || 'Error fetching movie detail');
                 setLoading(false);
             }
@@ -35,7 +36,7 @@ const MovieDetail: React.FC= () => {
     if (!movie) return <div>No movie details available</div>;
 
     const releaseYear = movie.releaseYear ? new Date(movie.releaseYear).getFullYear() : "Fecha de estreno no disponible";
-    const genres = movie.genres.join(", ");
+
 
     return (
         <><div className='back-list'>
@@ -43,9 +44,6 @@ const MovieDetail: React.FC= () => {
                 <FaArrowLeft className={styles['back-icon']} /> Regresar al listado
             </div>
         </div><div className={styles['movie-detail']}>
-                {/* <button className={styles['back-button']} onClick={() => navigate(-1)}>
-        <FaArrowLeft className={styles['back-icon']} /> Regresar al listado
-    </button> */}
                 <div className={styles['poster-container']}>
                     {movie.poster_path ? (
                         <img
@@ -60,14 +58,11 @@ const MovieDetail: React.FC= () => {
                     )}
                 </div>
                 <div className={styles['details-container']}>
-                    {/* <h2 className={styles['movie-title']}>{movie.title || "No title available"}</h2> */}
-                    <h2 className={styles['original-title']}>{movie.original_title || "Título original no disponible"}({releaseYear}) </h2>
+                    <h2 className={styles['original-title']}>{movie.original_title || "Título original no disponible"}({releaseYear})</h2>
                     <p className={styles['rating']}><FaStar className={styles['star-icon']} />{movie.rating}/10</p>
-                    <p className={styles['genres']}>Géneros: {genres}</p>
-                    <p className={styles['synopsis']}>Sinópsis: {movie.overview || "Sinopsis no disponible"}</p>
-                    {/* <p className={styles['rating']}><FaStar className={styles['star-icon']} />{movie.rating}/10</p> */}
-                    {/* <p className={styles['release-year']}>Año de lanzamiento: {releaseYear}</p> */}
-                    {/* <p className={styles['genres']}>Géneros: {genres}</p> */}
+                    <p className={styles['genres']}><p className={styles['title-genres']}>Géneros: </p>{movie.genres?.join(", ")}</p>
+                    <p className={styles['synopsis']}><p className={styles['title-synopsis']}>Sinópsis:</p> {movie.overview || "Sinópsis no disponible"}</p>
+                   
                 </div>
             </div></>
     );

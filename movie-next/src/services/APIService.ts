@@ -63,7 +63,7 @@ if (sortBy) {
       })
       .then(data => { 
         //Mapea los datos de las peliculas de la API al modelo de negocio Movie utilizando formatMovie
-        const movies: Movie[] = data.results.map( (apiMovie: apiMovieData) => formatMovie(apiMovie, genresMap) );
+        const movies: Movie[] = data.results.map( (apiMovie: apiMovieData) => formatMovie(apiMovie, genresMap, false) );
         const metaData = {
           pagination: {
             currentPage: data.page,

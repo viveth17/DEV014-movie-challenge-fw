@@ -69,7 +69,7 @@ try {
     const genres = await getMovieGenres();
     const genresMap = formatGenresToMap(genres);
 
-    return formatMovie(data, genresMap);
+    return formatMovie(data, genresMap, true);
 } catch (error) {
     if (error instanceof TypeError && error.message === 'Failed to fetch') {
         throw new Error('Network request failed');
