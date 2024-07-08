@@ -6,9 +6,9 @@ export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.tsx?$': 'babel-jest',
+    '^.+\\.(tsx?)$': 'babel-jest',
     '^.+\\.svg$': 'jest-transform-stub',
-    "\\.[jt]sx?$": "babel-jest",
+    // "\\.[jt]sx?$": "babel-jest",
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   rootDir: 'src',

@@ -1,20 +1,19 @@
 import React from 'react'
 import styles from '../styles/ListOptions.module.css';
 
-interface Option {
+export interface Option {
     value: string;
     label: string;
 }
 
-interface ListOptionsProps { // para almacenar las opciones a listar 
+export interface ListOptionsProps { // para almacenar las opciones a listar 
     title: string;
     options: Option[]; //almacena las opciones que se listaran en el <select>
     selectedOption: Option | null; // almacen la opcion seleccionada actualmente o null si no hay ninguna seleccionada
     onChange: (option: Option | null) => void; //funcion que se ejecuta cuando se selecciona una opcion del <select>
     onClear: () => void; // funcion que se ejecuta cuando el usuario borra la seleccion actual 
 }
-
-export const ListOptions: React.FC<ListOptionsProps> = ({ title, options, selectedOption, onChange, onClear }) => {
+const ListOptions: React.FC<ListOptionsProps> = ({ title, options, selectedOption, onChange, onClear }) => {
     return (
         <div className={styles.container}>
             {/* Renderizar el titulo dinámiacamente  */}
