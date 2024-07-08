@@ -60,9 +60,11 @@ const MovieDetail: React.FC = () => {
                 <div className={styles['details-container']}>
                     <h2 className={styles['original-title']}>{movie.original_title || "Título original no disponible"}({releaseYear})</h2>
                     <p className={styles['rating']}><FaStar className={styles['star-icon']} />{movie.rating}/10</p>
-                    <p className={styles['genres']}><p className={styles['title-genres']}>Géneros: </p>{movie.genres?.join(", ")}</p>
-                    <p className={styles['synopsis']}><p className={styles['title-synopsis']}>Sinópsis:</p> {movie.overview || "Sinópsis no disponible"}</p>
-                   
+                    <p className={styles['genres']}><span className={styles['title-genres']}>Géneros: </span>{movie.genres?.join(", ")}</p>
+                    <div className={styles['synopsis']}>
+                        <p className={styles['title-synopsis']}>Sinópsis:</p>
+                        <p> {movie.overview || "Sinópsis no disponible"}</p>
+                    </div>
                 </div>
             </div></>
     );
