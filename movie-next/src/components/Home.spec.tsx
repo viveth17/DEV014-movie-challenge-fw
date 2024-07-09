@@ -167,7 +167,7 @@
 //     await waitFor(() => {
 //       expect(window.location.search).toContain('sortBy=popularity.desc');
 //     });
-   
+
 //   });
 
 
@@ -214,7 +214,7 @@
 //   //   });
 //   // });
 
-  
+
 
 //   // it('debería manejar clics en los botones de paginación', async () => {
 //   //   const mockMoviesPage1 = {
@@ -362,7 +362,7 @@
 //   //     expect(screen.queryAllByText('Loading...').length).toBe(0); // Spinner ya no debería estar presente
 //   //   });
 //   // });
-  
+
 // //   // it('debería actualizar la URL al cambiar de página', () => {
 // //   //   const { container } = render(
 // //   //     <Router>
@@ -405,94 +405,98 @@
 
 
 
+// import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event'
+// import { MemoryRouter } from 'react-router-dom';
+// import Home from './Home';
+// import '@testing-library/jest-dom';
+// import * as movieService from '../services/movieService';
+
+// // Mock de getMoviesGenres 
+// jest.mock('../services/movieService', () => ({
+//   getMovieGenres: jest.fn().mockResolvedValue([
+//     { id: 28, name: 'Action' },
+//     { id: 12, name: 'Adventure' },
+//     { id: 878, name: 'Science Fiction' },
+//   ]),
+// }));
+
+// describe('Home Component', () => {
+//   it('debería actualizar la URL al seleccionar un género y ordenar por opción', async () => {
+//     // Renderizar el componente Home dentro del MemoryRouter 
+//     render(
+//       <MemoryRouter initialEntries={['/']}>
+//         <Home />
+//       </MemoryRouter>
+//     );
+
+//     // Esperar a que los géneros se carguen
+//     await waitFor(() => expect(movieService.getMovieGenres).toHaveBeenCalled());
+
+//     // Seleccionar opción de género
+//     const genreSelectContainer = screen.getByText("Filtrar por género:").closest('.selectContainer');
+//     if (genreSelectContainer) {
+//       const genreSelect = genreSelectContainer.querySelector('select');
+//       if (genreSelect) {
+//         userEvent.selectOptions(genreSelect, "Action");
+//         console.log("window.location.search después de seleccionar género:", window.location.search);
+//       }
+//     }
+
+//     // Verificar que la URL se actualizó correctamente con el parámetro de género
+//     await waitFor(() => {
+//       expect(window.location.search).toContain("genreId=28");
+//     });
+
+//     // Seleccionar opción de ordenamiento
+//     const sortSelectContainer = screen.getByText('Ordenar por:').closest('.selectContainer');
+//     if (sortSelectContainer) {
+//       const sortSelect = sortSelectContainer.querySelector('select');
+//       if (sortSelect) {
+//         fireEvent.mouseDown(sortSelect);
+//         fireEvent.change(sortSelect, { target: { value: 'popularity.desc' } });
+//         console.log("window.location.search después de seleccionar ordenamiento:", window.location.search);
+//       }
+//     }
+//     // Verificar que la URL se actualizó correctamente con el parámetro de ordenamiento
+//     await waitFor(() => {
+//       expect(window.location.search).toContain('sortBy=popularity.desc');
+//     });
+//   });
+// });
+
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
-import { MemoryRouter } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Home from './Home';
-import '@testing-library/jest-dom';
-import * as APIService from '../services/APIService';
-import * as movieService from '../services/movieService';
 
-// Mock de getMovies
-jest.mock('../services/APIService', () => ({
-  getMovies: jest.fn().mockResolvedValue({
-    movies: [
-      {
-        genres: ["Science Fiction", "Adventure", "Action"],
-        genre_ids: [878, 28, 12],
-        poster_path: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
-        release_date: "2024-03-27",
-        title: "Godzilla x Kong: The New Empire",
-        vote_average: 7.261,
-        backdrop_path: "/some_backdrop_path.jpg",
-        id: 653346,
-        original_title: "Godzilla vs Kong Original Title",
-        overview: "This is an overview.",
-        releaseYear: "2024-03-27",
-      }
-    ],
-    metaData: {
-      pagination: {
-        totalPages: 1,
-      },
-    },
-  }),
-}));
+test('debería actualizar la URL al seleccionar un género y ordenar por opción', async () => {
+  render(
+    <Router>
+      <Home />
+    </Router>
+  );
 
-// Mock de getMovieGenres
-jest.mock('../services/movieService', () => ({
-  getMovieGenres: jest.fn().mockResolvedValue([
-    { id: 28, name: 'Action' },
-    { id: 12, name: 'Adventure' },
-    { id: 878, name: 'Science Fiction' },
-  ]),
-}));
-
-describe('Home Component', () => {
-  it('debería actualizar la URL al seleccionar un género y ordenar por opción', async () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <Home />
-      </MemoryRouter>
-    );
-
-    // Esperar a que los géneros se carguen
-    await waitFor(() => expect(movieService.getMovieGenres).toHaveBeenCalled());
-
-    // Seleccionar opción de género
-    const genreSelectContainer = screen.getByText('Filtrar por género:').closest('div.selectContainer');
-    if (genreSelectContainer) {
-      const genreSelect = genreSelectContainer.querySelector('select');
-      if (genreSelect) {
-        // fireEvent.change(genreSelect, { target: { value: '28' } });
-        userEvent.type(genreSelect, 'Action');
-        // fireEvent.change(genreSelect, { target: { value: '28' } });
-        fireEvent.click(screen.getByText('Action'));
-      }
-    }
-
-    console.log("window.location.search", window.location.search);
-    // Verificar que la URL se actualizó correctamente con el parámetro de género
-    await waitFor(() => {
-      expect(window.location.search).toContain('genreId=28');
-    });
-
-    // Seleccionar opción de ordenamiento
-    const sortSelectContainer = screen.getByText('Ordenar por:').closest('div.selectContainer');
-    if (sortSelectContainer) {
-      const sortSelect = sortSelectContainer.querySelector('select');
-      if (sortSelect) {
-        fireEvent.mouseDown(sortSelect);
-        fireEvent.change(sortSelect, { target: { value: 'popularity.desc' } });
-        fireEvent.click(screen.getByText('Más popular Desc'));
-      }
-    }
-
-    // Verificar que la URL se actualizó correctamente con el parámetro de ordenamiento
-    await waitFor(() => {
-      expect(window.location.search).toContain('sortBy=popularity.desc');
-    });
+  // Espera explícita hasta que el componente Home se renderice completamente
+  await waitFor(() => {
+    expect(screen.getByText(/Filtrar por género:/i)).toBeInTheDocument();
   });
+
+  // Seleccionar una opción de género y ordenar por opción
+  const selectGenre = screen.getByLabelText('Filtrar por género:');
+  userEvent.selectOptions(selectGenre, 'Action');
+
+  const selectSortBy = screen.getByLabelText('Ordenar por:');
+  userEvent.selectOptions(selectSortBy, 'Popularidad descendente');
+
+  // Asegurar que la URL se actualice después de las selecciones
+  await waitFor(() => {
+    expect(window.location.pathname).toMatch(/\/movies\?genre=Action&sortBy=popularity.desc/);
+  });
+
+  // Aquí puedes realizar más aserciones según sea necesario
 });
+
+
+

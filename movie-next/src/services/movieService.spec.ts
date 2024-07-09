@@ -1,6 +1,6 @@
 import { getMovieGenres, getMovieDetail } from './movieService';
 // import {formatMovie, formatGenresToMap} from '../utils/transformers';
-import {apiMovieData} from '../models/ApiMovieData';
+import { apiMovieData } from '../models/ApiMovieData';
 import Movie from '../models/Movie';
 
 // Mock de fetch para simular solicitudes a la API
@@ -73,14 +73,18 @@ describe('getMovieDetail', () => {
     title: 'Mock Movie',
     poster_path: '/mockposter.jpg',
     release_date: '2022-01-01',
-    genre_ids: [1, 2],
+    genres: [{ id: 28, name: "Action" }, { id: 12, name: "Adventure" }],
     vote_average: 8.5,
-    backdrop_path: '/mockbackdrop.jpg'
+    backdrop_path: '/mockbackdrop.jpg',
+    overview: 'Mock overview', // Agregar overview
+    original_title: 'Mock Original Title' // Agregar original_title
+    ,
+    genre_ids: []
   };
 
   const mockGenres = [
-    { id: 1, name: 'Action' },
-    { id: 2, name: 'Comedy' },
+    { id: 28, name: 'Action' },
+    { id: 12, name: 'Adventure' },
   ];
 
   const mockFormattedMovie: Movie = {
@@ -88,9 +92,12 @@ describe('getMovieDetail', () => {
     title: 'Mock Movie',
     poster: '/mockposter.jpg',
     releaseYear: '2022-01-01',
-    genres: ['Action', 'Comedy'],
+    genres: ['Action', 'Adventure'],
     rating: 8.5,
-    backdrop_path: '/mockbackdrop.jpg'
+    backdrop_path: '/mockbackdrop.jpg',
+    overview: 'Mock overview',
+    original_title: 'Mock Original Title',
+    poster_path: '/mockposter.jpg'
   };
 
   it('debería obtener los detalles de la película y transformarlos al modelo de Movie', async () => {
@@ -111,23 +118,26 @@ describe('getMovieDetail', () => {
     expect(fetch).toHaveBeenCalledTimes(2);
 
     // Verifica la llamada para obtener detalles de la película
-    expect(fetch).toHaveBeenCalledWith(expect.stringContaining('/movie/1'), expect.any(Object));
+    expect(fetch).toHaveBeenCalledWith(expect.stringContaining('/movie/1'));
 
     // Verifica la llamada para obtener los géneros
-    expect(fetch).toHaveBeenCalledWith(expect.stringContaining('/genre/movie/list'), expect.any(Object));
+    expect(fetch).toHaveBeenCalledWith(expect.stringContaining('/genre/movie/list'));
 
     // Verifica que el resultado sea el modelo de película formateado correctamente
     expect(result).toEqual(mockFormattedMovie);
   });
 
   it('debería lanzar un error si falta la API_KEY', async () => {
-    //simula la falta de API KEY
+    //Guarda la API_KEY original
+    const originalApiKey = process.env.REACT_APP_API_KEY;
+    //elimina la API_KEY 
     delete process.env.REACT_APP_API_KEY;
-
+    try{
     await expect(getMovieDetail(1)).rejects.toThrow('API_KEY not found in environment variables');
-    //Retaurar el valor original de API_KEY despues de la prueba
-
-    process.env.REACT_APP_API_KEY = "mock_api_key";
+    }finally {
+    //Retaura la API_KEY original
+    process.env.REACT_APP_API_KEY = originalApiKey;
+    }
   });
 
   it('debería lanzar un error si falla la solicitud de película', async () => {
@@ -153,4 +163,4 @@ describe('getMovieDetail', () => {
     await expect(getMovieDetail(1)).rejects.toThrow('Network response was not ok');
   });
 });
- 
+

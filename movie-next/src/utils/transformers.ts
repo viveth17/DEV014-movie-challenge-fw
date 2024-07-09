@@ -6,22 +6,24 @@ interface Genre {
   name: string;
 }
 
-export function formatMovie(apiMovieData: apiMovieData, genresMap:  Map<number, string>, isDetail: boolean): Movie {
+export function formatMovie(apiMovieData: apiMovieData, genresMap: Map<number, string>, isDetail: boolean): Movie {
 
-  let genres: string[];
+  let genres: string[] = [];
 
   if (isDetail === true) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    genres = apiMovieData.genres.map((element: any) => element.name);
+    //verifica si apiMovieData.genres esta definido antes de llamar a map
+    if (apiMovieData.genres) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      genres = apiMovieData.genres.map((element: any) => element.name);
+    } else {
+      genres = [];
+    }
   } else {
     // Verifica si genre_ids está definido; si no, asigna un arreglo vacío
-  const genreIds = apiMovieData.genre_ids || [];
-  // Mapea los IDs de género a nombres usando el genresMap
-  genres = genreIds.map(id => genresMap.get(id) || 'Unknown');
-  // const genres = apiMovieData.genre_ids?.map(id => genresMap.get(id) || 'Unknown') || [];
+    const genreIds = apiMovieData.genre_ids || [];
+    // Mapea los IDs de género a nombres usando el genresMap
+    genres = genreIds.map(id => genresMap.get(id) || 'Unknown');
   }
-  
-
   // console.log('genres', genres);
   const formattedMovie: Movie = {
     title: apiMovieData.title,
@@ -43,14 +45,14 @@ export function formatMovie(apiMovieData: apiMovieData, genresMap:  Map<number, 
 export function formatGenresToMap(genres: Genre[]): Map<number, string> {
   const genresMap = new Map<number, string>();
 
-   // Verifica si el arreglo de géneros está vacío
-   if (genres.length === 0) {
+  // Verifica si el arreglo de géneros está vacío
+  if (genres.length === 0) {
     return genresMap; // Devuelve un Map vacío directamente
-}
+  }
 
   genres.forEach(genre => {
-      genresMap.set(genre.id, genre.name);
-      // console.log(`Agregado género: ID ${genre.id} - Nombre ${genre.name}`);
+    genresMap.set(genre.id, genre.name);
+    // console.log(`Agregado género: ID ${genre.id} - Nombre ${genre.name}`);
   });
 
   return genresMap;

@@ -49,6 +49,7 @@ export async function getMovieGenres(): Promise<Genre[]> {
 //La función debe devolver una Promise que resuelva un modelo de negocio Movie
 
 export async function getMovieDetail(id: number) : Promise<Movie>  {
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 if (!API_KEY) {
     throw new Error('API_KEY not found in environment variables');
