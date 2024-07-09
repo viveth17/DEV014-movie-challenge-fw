@@ -68,6 +68,7 @@ const Home: React.FC = () => {
   const handleGenreChange = (option: { value: string; label: string } | null) => {
     const genreId = option ? parseInt(option.value) : null;
     setSelectedGenre(genreId);
+    console.log("hasChange");
     setSearchParams((prevParams) => {
       const newParams = new URLSearchParams(prevParams);
       if (genreId !== null) {
@@ -130,9 +131,9 @@ const Home: React.FC = () => {
   return (
     <div className={appStyles.root}>
       {isLoading && (
-        <div className={appStyles.root}>
+        <div className={styles.spinnerContainer}>
           <Spinner />
-          <p className={appStyles.loading}>Loading...</p>
+          <p className={styles.loading}>Loading...</p>
         </div>
       )}
       {error && (

@@ -4,6 +4,8 @@ import Movie from '../models/Movie';
 import { getMovieDetail } from '../services/movieService';
 import styles from '../styles/MovieDetail.module.css';
 import { FaArrowLeft, FaStar } from 'react-icons/fa'; //  icono de flecha y estrella
+import { Spinner } from 'reactstrap';
+// import appStyles from '../styles/App.module.css';
 
 const MovieDetail: React.FC = () => {
 
@@ -31,12 +33,11 @@ const MovieDetail: React.FC = () => {
         fetchMovieDetail();
     }, [id]);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return  <div className={styles.spinner}><Spinner/><p className={styles.loading}>Loading...</p></div>;
     if (error) return <div>Error: {error}</div>;
     if (!movie) return <div>No movie details available</div>;
 
     const releaseYear = movie.releaseYear ? new Date(movie.releaseYear).getFullYear() : "Fecha de estreno no disponible";
-
 
     return (
         <><div className='back-list'>
