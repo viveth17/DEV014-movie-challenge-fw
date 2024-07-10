@@ -16,7 +16,7 @@ describe('getMovies', () => {
   });
 
 
-  it('Debería devolver una lista de peliculas para la primera página', () => {  // Primer caso de la prueba 
+  it('Debería devolver una lista de peliculas para la primera página', () => {  
     // Simular la respuesta de la API 
 
     const mockMovies = {
@@ -82,9 +82,9 @@ describe('getMovies', () => {
           title: "Another Movie",
           vote_average: 6.5,
           backdrop_path: "/another_backdrop.jpg",
-          id: undefined, // Simula un id indefinido
-          original_title: undefined, // Simula un original_title indefinido
-          overview: undefined // Simula un overview indefinido
+          id: undefined, 
+          original_title: undefined, 
+          overview: undefined 
 
         }
       ]
@@ -158,9 +158,9 @@ describe('getMovies', () => {
           title: "No Genre Movie",
           vote_average: 5.5,
           backdrop_path: "/no_genre_backdrop.jpg",
-          id: 1, // Asegúrate de incluir id
-          original_title: "No Genre Movie Original Title", // Asegúrate de incluir original_title
-          overview: "This is an overview." // Asegúrate de incluir overview
+          id: 1, 
+          original_title: "No Genre Movie Original Title",
+          overview: "This is an overview."
         }
       ]
     };
@@ -173,10 +173,10 @@ describe('getMovies', () => {
         title: "No Genre Movie",
         rating: 5.5,
         backdrop_path: "/no_genre_backdrop.jpg",
-        id: 1, // Incluye id
-        original_title: "No Genre Movie Original Title", // Incluye original_title
-        overview: "This is an overview.", // Incluye overview
-        poster_path: "/no_genre_poster.jpg" // Incluye poster_path
+        id: 1, 
+        original_title: "No Genre Movie Original Title", 
+        overview: "This is an overview.",
+        poster_path: "/no_genre_poster.jpg" 
 
       }
     ];
@@ -203,9 +203,9 @@ describe('getMovies', () => {
           title: null,
           vote_average: null,
           backdrop_path: null,
-          id: undefined, // simula un id indefinido
-          original_title: undefined, //simula un original_title indefinido
-          overview: undefined // simula un overview indefinido
+          id: undefined, 
+          original_title: undefined, 
+          overview: undefined 
         }
       ]
     };
@@ -253,9 +253,9 @@ describe('getMovies', () => {
           title: "Action Popular Movie",
           vote_average: 8.0,
           backdrop_path: "/action_popular_backdrop.jpg",
-          id: undefined, //simula un id indefinido
-          original_title: undefined, //simula un original_title indefinido
-          overview: undefined // simula un overview indefinido
+          id: undefined, 
+          original_title: undefined, 
+          overview: undefined 
         }
       ]
     };
@@ -303,9 +303,9 @@ describe('getMovies', () => {
           title: "Page 3 Movie",
           vote_average: 7.2,
           backdrop_path: "/page3_backdrop.jpg",
-          id: undefined, // Simula un id indefinido
-          original_title: undefined, // Simula un original_title indefinido
-          overview: undefined // Simula un overview indefinido
+          id: undefined, 
+          original_title: undefined, 
+          overview: undefined 
         }
       ]
     };
@@ -353,9 +353,9 @@ describe('getMovies', () => {
           title: "Action Popular Movie",
           vote_average: 8.0,
           backdrop_path: "/action_popular_backdrop.jpg",
-          id: undefined, // Simula un id indefinido
-          original_title: undefined, // Simula un original_title indefinido
-          overview: undefined // Simula un overview indefinido
+          id: undefined, 
+          original_title: undefined, 
+          overview: undefined 
 
         }
       ]

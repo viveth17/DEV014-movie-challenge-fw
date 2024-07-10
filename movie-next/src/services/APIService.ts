@@ -1,15 +1,12 @@
-//agregar el metodo "getMovies" (Metodo que hara la solicitud a The Movie DB para obtner los datos de las peliculas)
-//importar funcion "formatMovie" (Para transformar esos datos)
 import { formatMovie } from "../utils/transformers";
 import Movie from "../models/Movie";
-// import dotenv from 'dotenv'; //para acceder a la variable de entorno (importar 'dotenv')
 import { apiMovieData } from "../models/ApiMovieData";
 
 
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = process.env.REACT_APP_API_KEY;
-// const API_KEY = '507d215bc9cdb8bdfd69fe3f82871b8b';/*process.env.API_KEY;*/  // para acceder a la variable de entorno definida en .env
+
 
 interface GetMoviesParams {
   filters: {
@@ -33,7 +30,7 @@ export function getMovies(params : GetMoviesParams, genresMap:  Map<number, stri
 
   const {filters } = params; //Desestructuracion para obtner el objeto filters
   const {page, genreId = null, sortBy = null } = filters; // Desestructuación para obtener los valores de page, genreId y sortBy
-  //establecer valores predeterminados de null para genreId y sortBy
+ 
 
     if (!API_KEY) { //verifica API_KEY esté definida en las variables de entorno
       throw new Error('API_KEY not found in environment variables');

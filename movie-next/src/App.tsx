@@ -13,15 +13,11 @@ function App() {
       <div className="app-container">
         <h1 className="main-title">MOVIE</h1>
       </div>
-      {/* <div className='app-filters'>
-      </div> */}
-      {/* Definicion de rutas y direcciones a sus componentes  */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
         
       </Routes>
-      {/* <MovieList movies={movies} /> */}
       <p role="paragraph" title="read-the-docs" className="read-the-docs">
       </p>
       <footer>

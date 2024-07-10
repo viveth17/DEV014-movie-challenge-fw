@@ -41,7 +41,7 @@ describe('MovieList', () => {
     );
 
     // Verifica que el componente MovieList renderice correctamente
-    expect(screen.getByText('Godzilla x Kong: The New Empire')).toBeTruthy(); // Ajusta según corresponda el título
+    expect(screen.getByText('Godzilla x Kong: The New Empire')).toBeTruthy(); 
 
     // Verifica que se renderice cada película usando MovieCard
     moviesData.forEach((movie) => {

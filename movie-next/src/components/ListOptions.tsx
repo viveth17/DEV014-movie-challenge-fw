@@ -6,18 +6,17 @@ export interface Option {
     label: string;
 }
 
-export interface ListOptionsProps { // para almacenar las opciones a listar
+export interface ListOptionsProps { 
     id: string; 
     title: string;
-    options: Option[]; //almacena las opciones que se listaran en el <select>
-    selectedOption: Option | null; // almacen la opcion seleccionada actualmente o null si no hay ninguna seleccionada
-    onChange: (option: Option | null) => void; //funcion que se ejecuta cuando se selecciona una opcion del <select>
-    onClear: () => void; // funcion que se ejecuta cuando el usuario borra la seleccion actual 
+    options: Option[]; 
+    selectedOption: Option | null; 
+    onChange: (option: Option | null) => void; 
+    onClear: () => void; 
 }
 const ListOptions: React.FC<ListOptionsProps> = ({ id, title, options, selectedOption, onChange, onClear }) => {
     return (
         <div id={id} className={styles.container}>
-            {/* Renderizar el titulo dinámiacamente  */}
             <h3 className={styles.title}>{title}</h3>
             <div className={styles.selectContainer}>
                 <select

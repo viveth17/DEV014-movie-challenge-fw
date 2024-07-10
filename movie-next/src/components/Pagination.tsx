@@ -4,12 +4,11 @@ import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
 import styles from '../styles/Pagination.module.css';
 
-// Definición de la interfaz para los props del componente
 interface PaginationProps {
     currentPage: number;
     totalPages: number;
     onSelectPage: (page: number) => void;
-    // Aquí definimos el tipo de onSelectPage
+   
 }
 
 const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPages, onSelectPage }) => {
@@ -18,13 +17,13 @@ const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPage
         //llamado de la función onSelectPage con el # de página seleccionado
         onSelectPage(value);
     };
-    // Renderizado de paginación
+
     return (
         <Stack spacing={2} className={styles.container} >
             <Pagination
                 count={totalPages}
                 page={currentPage}
-                onChange={handlePageChange} //manejador de evento
+                onChange={handlePageChange} 
                 shape="rounded"
                 renderItem={(item) => (
                     <PaginationItem

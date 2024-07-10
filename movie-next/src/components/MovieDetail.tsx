@@ -5,12 +5,11 @@ import { getMovieDetail } from '../services/movieService';
 import styles from '../styles/MovieDetail.module.css';
 import { FaArrowLeft, FaStar } from 'react-icons/fa'; //  icono de flecha y estrella
 import { Spinner } from 'reactstrap';
-// import appStyles from '../styles/App.module.css';
 
 const MovieDetail: React.FC = () => {
 
-    const { id } = useParams<{ id: string }>(); // para obtener el "id" de la url dinámicamente 
-    const navigate = useNavigate(); //Hook para la navegación
+    const { id } = useParams<{ id: string }>(); 
+    const navigate = useNavigate(); 
 
     const [movie, setMovie] = useState<Movie | null>(null);
     const [loading, setLoading] = useState<boolean>(true);

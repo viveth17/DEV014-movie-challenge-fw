@@ -1,9 +1,9 @@
-import { formatMovie, formatGenresToMap } from "../utils/transformers"; //importacion de la funcion a poner a prueba
-import { apiMovieData } from "../models/ApiMovieData"; //importacion del tipo de datos de la API
-import Movie from "../models/Movie"; //Importacion de el modelo de negocio Movie
+import { formatMovie, formatGenresToMap } from "../utils/transformers"; 
+import { apiMovieData } from "../models/ApiMovieData"; 
+import Movie from "../models/Movie"; 
 
 
-describe ('formatMovie', () => {  //Descripcion de las pruebas para formatMovie
+describe ('formatMovie', () => {  
 
    // Simula la respuesta de la API de géneros
    const genresFromApi = [
@@ -15,7 +15,7 @@ describe ('formatMovie', () => {  //Descripcion de las pruebas para formatMovie
   // Genera el Map de géneros
   const genresMap = formatGenresToMap(genresFromApi);
 
-    it('Debería transformar los datos de la API al modelo Movie', () => { // Primer caso de prueba
+    it('Debería transformar los datos de la API al modelo Movie', () => { 
 
     const apiData: apiMovieData = {
       "genre_ids": [
@@ -55,7 +55,7 @@ describe ('formatMovie', () => {  //Descripcion de las pruebas para formatMovie
       expect(formattedMovie).toEqual(expectedMovie); //Comprobacion de que el resultado de la funcion sea igual al objeto esperado
     });
   
-    it('debería manejar datos incompletos de la API', () => { //Segundo caso de prueba 
+    it('debería manejar datos incompletos de la API', () => { 
     //Definimos datos parciales de la API (incompletos)
       const apiData: Partial<apiMovieData> = {
         title: 'Pelicula de ejemplo incompleta',
@@ -65,7 +65,7 @@ describe ('formatMovie', () => {  //Descripcion de las pruebas para formatMovie
         title: 'Pelicula de ejemplo incompleta',
         poster: undefined,
         releaseYear: undefined,
-        genres: [], //si no hay géneros será un array vacío
+        genres: [], 
         rating: undefined,
         id : undefined,
         backdrop_path: undefined

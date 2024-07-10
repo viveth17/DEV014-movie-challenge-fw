@@ -3,25 +3,23 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface MovieCardProps {
-    // definir una prop movie de tipo Movie
     movie: Movie;
 }
 export const MovieCard: React.FC<MovieCardProps> = ({ movie}) => {
 
-    const navigate = useNavigate(); // obtener la función de navegación
+    const navigate = useNavigate(); 
 
-    //Extraer el año de la fecha de estreno
+    
     const releaseYear = movie.releaseYear ? new Date(movie.releaseYear).getFullYear() : "Fecha de estreno no disponible";
 
-     // Verificar los géneros disponibles
-    //  console.log("Generos disponibles:", movie.genres);
+    
 
      // Construir la cadena de géneros separados por comas
     const genres = movie.genres?.join(", ") || "Géneros no disponibles";
 
     // Función para manejar la navegación a la página de detalles de la película
     const handleMovieClick = () => {
-        navigate(`/movie/${movie.id}`);  // Navegar a la URL correspondiente a la película
+        navigate(`/movie/${movie.id}`);  
     };
 
     return (

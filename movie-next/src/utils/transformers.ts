@@ -24,12 +24,12 @@ export function formatMovie(apiMovieData: apiMovieData, genresMap: Map<number, s
     // Mapea los IDs de género a nombres usando el genresMap
     genres = genreIds.map(id => genresMap.get(id) || 'Unknown');
   }
-  // console.log('genres', genres);
+ 
   const formattedMovie: Movie = {
     title: apiMovieData.title,
     poster: apiMovieData.poster_path,
     releaseYear: apiMovieData.release_date,
-    genres, // cambiando de genre a genres
+    genres,
     rating: apiMovieData.vote_average,
     id: apiMovieData.id,
     backdrop_path: apiMovieData.backdrop_path,
@@ -52,7 +52,7 @@ export function formatGenresToMap(genres: Genre[]): Map<number, string> {
 
   genres.forEach(genre => {
     genresMap.set(genre.id, genre.name);
-    // console.log(`Agregado género: ID ${genre.id} - Nombre ${genre.name}`);
+   
   });
 
   return genresMap;

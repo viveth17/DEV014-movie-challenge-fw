@@ -1,4 +1,3 @@
-// import '@testing-library/jest-dom/extend-expect';
 import {fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { MovieCard } from "./MovieCard.tsx"; // importamos el componente a probar 
@@ -32,7 +31,7 @@ beforeAll(() => {
     ) as jest.Mock;
 });
 
-//Datos de película son géneros
+//Datos de película con géneros
 const movieData: Movie = {
     title: "Godzilla x Kong: The New Empire",
     releaseYear: "2024-03-27",
