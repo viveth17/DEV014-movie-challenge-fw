@@ -8,6 +8,8 @@
         "Pagination",
         "movieService",
         "transformers",
-        "ListOptions"
+        "ListOptions",
+        "MovieDetail",
+        "README"
     ]
 }
