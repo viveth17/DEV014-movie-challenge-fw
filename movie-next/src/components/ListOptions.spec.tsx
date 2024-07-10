@@ -19,6 +19,7 @@ describe('ListOptions', () => {
   it('debería renderizar el título correctamente', () => {
     render(
       <ListOptions
+              id="test" 
               title="Título de prueba"
               options={mockOptions}
               selectedOption={null}
@@ -33,6 +34,7 @@ describe('ListOptions', () => {
   it('debería mostrar las opciones en el <select>', () => {
       render(
           <ListOptions
+              id="test" 
               title="Título de prueba"
               options={mockOptions}
               selectedOption={null}
@@ -51,6 +53,7 @@ describe('ListOptions', () => {
   it('debería seleccionar una opción correctamente', () => {
       render(
           <ListOptions
+              id="test" 
               title="Título de prueba"
               options={mockOptions}
               selectedOption={null}
@@ -68,6 +71,7 @@ describe('ListOptions', () => {
   it('debería llamar a onClear al hacer clic en el botón "Borrar"', () => {
       render(
           <ListOptions
+              id="test" 
               title="Título de prueba"
               options={mockOptions}
               selectedOption={mockOptions[0]}
@@ -85,6 +89,7 @@ describe('ListOptions', () => {
   it('debería mostrar la opción seleccionada en el <select>', () => {
       render(
           <ListOptions
+              id="test" 
               title="Título de prueba"
               options={mockOptions}
               selectedOption={mockOptions[0]}
@@ -100,6 +105,7 @@ describe('ListOptions', () => {
   it('debería manejar adecuadamente la selección nula', () => {
       render(
           <ListOptions
+              id="test" 
               title="Título de prueba"
               options={mockOptions}
               selectedOption={null}

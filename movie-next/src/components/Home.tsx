@@ -68,8 +68,7 @@ const Home: React.FC = () => {
   const handleGenreChange = (option: { value: string; label: string } | null) => {
     const genreId = option ? parseInt(option.value) : null;
     setSelectedGenre(genreId);
-    // Console log para verificar que la función se ejecuta
-    console.log("handleGenreChange ejecutado");
+
     setSearchParams((prevParams) => {
       const newParams = new URLSearchParams(prevParams);
       if (genreId !== null) {
@@ -77,8 +76,7 @@ const Home: React.FC = () => {
       } else {
         newParams.delete('genreId');
       }
-      // Console log para verificar los parámetros de búsqueda actualizados
-      console.log("Nuevos parámetros de búsqueda:", newParams.toString());
+
       return newParams;
     });
   };
@@ -86,8 +84,6 @@ const Home: React.FC = () => {
   const handleSortChange = (option: { value: string; label: string } | null) => {
     const sortByValue = option ? option.value : null;
     setSortBy(sortByValue);
-    // Console log para verificar que la función se ejecuta
-    console.log("handleSortChange ejecutado");
     setSearchParams((prevParams) => {
       const newParams = new URLSearchParams(prevParams);
       if (sortByValue) {
@@ -95,8 +91,6 @@ const Home: React.FC = () => {
       } else {
         newParams.delete('sortBy');
       }
-      // Console log para verificar los parámetros de búsqueda actualizados
-      console.log("Nuevos parámetros de búsqueda:", newParams.toString());
 
       return newParams;
     });
@@ -161,6 +155,7 @@ const Home: React.FC = () => {
         <div>
           <div className={styles.containerSelect}>
             <ListOptions
+              id="filter-by-genre"
               title="Filtrar por género:"
               options={genreOptions}
               selectedOption={genreOptions.find(option => option.value === selectedGenre?.toString()) || null}
@@ -168,6 +163,7 @@ const Home: React.FC = () => {
               onClear={handleClearGenre}
             />
             <ListOptions
+              id="sort-by"
               title="Ordenar por:"
               options={sortOptions}
               selectedOption={sortOptions.find(option => option.value === sortBy) || null}
