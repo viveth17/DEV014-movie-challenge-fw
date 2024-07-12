@@ -34,10 +34,14 @@ MovieNext es una plataforma donde podrás visualizar, filtrar y ordenar películ
 ## Botones Adicionales
 - **Limpiar Filtros**: Cuenta con 2 botones para limpiar los filtros aplicados, permitiendo una búsqueda más eficiente. 🧹
 
+## Enlace a prototipo de alta fidelidad 
+https://www.figma.com/proto/tJyyMDsmgi0fWkGg8WWiV2/Prototipo-MOVIE-CHALLANGE-FINAL?node-id=1-2&t=sym70CoGVdCO011a-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2
+
 ## ¡Comienza a Explorar!
 Descubre películas increíbles y disfruta de una experiencia de usuario excepcional con MovieNext. 🌠
 
 ---
+
 
 **Nota:** Este proyecto utiliza datos proporcionados por The Movie Database API V3.
 
